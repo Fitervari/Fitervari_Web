@@ -6,12 +6,14 @@ import { AppComponent } from './app.component';
 import { MenuBarComponent } from './menu-bar/menu-bar.component';
 import { FlexModule } from "@angular/flex-layout";
 import { WorkoutPlansComponent } from './workout-plans/workout-plans.component';
+import { EquipmentManagementComponent } from './equipment-management/equipment-management.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     MenuBarComponent,
-    WorkoutPlansComponent
+    WorkoutPlansComponent,
+    EquipmentManagementComponent
   ],
     imports: [
         BrowserModule,
