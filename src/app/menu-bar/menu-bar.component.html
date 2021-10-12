@@ -1,12 +1,10 @@
-<div id="menu-bar" class="mat-typography">
-  <span id="logo">
-    <img src="favicon.ico" alt="logo"/>
+<mat-toolbar>
+  <a routerLink="/" mat-icon-button class="logo-button">
+    <img src="favicon.ico" alt="logo" class="logo-image">
+  </a>
+  <span class="spacer"></span>
+  <span fxLayout="row" fxLayoutAlign="space-around" class="navigation">
+    <span routerLink="workoutplans" class="navigation-item">Trainingspläne</span>
+    <span routerLink="equipment" class="navigation-item">Geräteverwaltung</span>
   </span>
-
-  <span id="navigation">
-    <span fxLayoutGap="50px" fxLayout="row">
-      <span routerLink="workoutplans">Trainingspläne</span>
-      <span routerLink="equipment">Geräteverwaltung</span>
-    </span>
-  </span>
-</div>
+</mat-toolbar>

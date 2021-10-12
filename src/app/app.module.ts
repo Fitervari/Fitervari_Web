@@ -8,6 +8,8 @@ import { FlexModule } from "@angular/flex-layout";
 import { WorkoutPlansComponent } from './workout-plans/workout-plans.component';
 import { EquipmentManagementComponent } from './equipment-management/equipment-management.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import {MatToolbarModule} from "@angular/material/toolbar";
+import {MatButtonModule} from "@angular/material/button";
 
 @NgModule({
   declarations: [
@@ -16,12 +18,14 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     WorkoutPlansComponent,
     EquipmentManagementComponent
   ],
-    imports: [
-        BrowserModule,
-        AppRoutingModule,
-        FlexModule,
-        BrowserAnimationsModule
-    ],
+  imports: [
+    BrowserModule,
+    AppRoutingModule,
+    FlexModule,
+    BrowserAnimationsModule,
+    MatToolbarModule,
+    MatButtonModule
+  ],
   providers: [],
   bootstrap: [AppComponent]
 })

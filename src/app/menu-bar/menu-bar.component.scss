@@ -1,39 +1,16 @@
-* {
-  box-sizing: border-box;
-  color: #2F80A3;
-  /*
-  padding: 0;
-  margin: 0;
-  */
+.logo-button {
+  width: fit-content;
 }
 
-span {
-  display: inline-block;
-}
-
-#menu-bar {
-  height: 85px;
-  width: 100%;
-  background: white;
-  box-shadow: 0px -1px 27px rgba(0, 0, 0, 0.25);
-  padding: 10px;
-}
-
-#menu-bar > * {
+.logo-image {
   height: 100%;
 }
 
-#logo > img {
-  height: 100%;
+.navigation {
+  margin-left: 100px;
 }
 
-#navigation {
-  position: relative;
-  left: 150px;
-  top: 0;
-
-  padding: 10px 0;
-
-  font-size: 30px;
+.navigation-item {
+  padding: 0 10px;
+  cursor: pointer;
 }
-
