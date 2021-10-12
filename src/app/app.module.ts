@@ -7,6 +7,7 @@ import { MenuBarComponent } from './menu-bar/menu-bar.component';
 import { FlexModule } from "@angular/flex-layout";
 import { WorkoutPlansComponent } from './workout-plans/workout-plans.component';
 import { EquipmentManagementComponent } from './equipment-management/equipment-management.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
   declarations: [
@@ -18,7 +19,8 @@ import { EquipmentManagementComponent } from './equipment-management/equipment-m
     imports: [
         BrowserModule,
         AppRoutingModule,
-        FlexModule
+        FlexModule,
+        BrowserAnimationsModule
     ],
   providers: [],
   bootstrap: [AppComponent]
