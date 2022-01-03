@@ -1,1 +1,33 @@
-<p>equipment-management works!</p>
+<div fxLayoutAlign="center center" fxFill>
+  <mat-card class="equipment-card" fxLayout="column" fxLayoutAlign="start stretch">
+    <mat-form-field appearance="fill" class="fill-horizontal">
+      <input matInput
+             placeholder="Suche"
+             [(ngModel)]="filterText"
+             (input)="filterDevices()">
+    </mat-form-field>
+    <div class="table-wrapper">
+      <table mat-table [dataSource]="shownDevices" class="fill-horizontal">
+        <ng-container matColumnDef="device">
+          <td mat-cell
+              mat-ripple
+              *matCellDef="let element"
+              (click)="editDevice(element)"
+              fxLayout="row"
+              fxLayoutAlign="space-between center">
+            {{element.name}}
+            <button mat-icon-button
+                    (click)="deleteDevice(element.id)">
+              <mat-icon>delete</mat-icon>
+            </button>
+          </td>
+        </ng-container>
+
+        <tr mat-row *matRowDef="let element; columns: ['device'];"></tr>
+      </table>
+    </div>
+    <button mat-fab color="primary" class="add-button">
+      <mat-icon>add</mat-icon>
+    </button>
+  </mat-card>
+</div>

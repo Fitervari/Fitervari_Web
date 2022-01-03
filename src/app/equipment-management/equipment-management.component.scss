@@ -1,0 +1,42 @@
+.fill-horizontal {
+  width: 100%;
+}
+
+.equipment-card {
+  width: 70%;
+  height: 80%;
+  padding: 0;
+}
+
+::ng-deep .mat-form-field-wrapper {
+  margin-bottom: -1.25em;
+}
+
+input {
+  padding-left: 13.5px;
+}
+
+.add-button {
+  position: absolute;
+  bottom: 15px;
+  right: 15px;
+}
+
+.table-wrapper {
+  overflow-y: auto;
+}
+
+.mat-cell {
+  cursor: pointer;
+  height: 48px;
+
+  word-wrap: initial;
+  display: table-cell;
+  line-break: unset;
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+.mat-row {
+  display: table-row;
+}
