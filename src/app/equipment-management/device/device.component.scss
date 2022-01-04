@@ -1,0 +1,22 @@
+.mat-expansion-panel {
+  border-radius: 0 !important;
+  margin: 0;
+}
+
+.mat-expansion-panel-header-title, .mat-expansion-panel-header-description {
+  flex-basis: 0;
+}
+
+.mat-expansion-panel-header {
+  height: 48px;
+}
+
+.edit-description-form-field {
+  width: 40vw;
+}
+
+@media only screen and (max-width: 700px) {
+  .mat-expansion-panel-header-description {
+    display: none !important;
+  }
+}

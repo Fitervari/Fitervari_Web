@@ -1,13 +1,13 @@
 <mat-toolbar>
-  <a routerLink="/" class="logo-button">
-    <img src="favicon.ico" alt="logo" class="logo-image">
+  <a class="logo-button" routerLink="/">
+    <img alt="logo" class="logo-image" src="favicon.ico">
   </a>
-  <span fxLayout="row" fxLayoutAlign="space-around" class="navigation">
-    <span routerLink="workoutplans" class="navigation-item">Trainingspläne</span>
-    <span routerLink="equipment" class="navigation-item">Geräteverwaltung</span>
+  <span class="navigation" fxLayoutAlign="space-around">
+    <span class="navigation-item" routerLink="workoutplans">Trainingspläne</span>
+    <span class="navigation-item" routerLink="equipment">Geräteverwaltung</span>
   </span>
   <span fxFlex="1 1 auto"></span>
-  <button routerLink="login" mat-icon-button>
+  <button mat-icon-button routerLink="login">
     <mat-icon>logout</mat-icon>
   </button>
 </mat-toolbar>

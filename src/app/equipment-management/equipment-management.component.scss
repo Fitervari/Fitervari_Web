@@ -1,42 +1,26 @@
-.fill-horizontal {
-  width: 100%;
+.equipment-card {
+  width: 70vw;
+  height: 75vh;
+  padding: 0;
 }
 
-.equipment-card {
-  width: 70%;
-  height: 80%;
-  padding: 0;
+input {
+  font-size: 15px;
+  padding-left: 13.5px;
 }
 
 ::ng-deep .mat-form-field-wrapper {
   margin-bottom: -1.25em;
 }
 
-input {
-  padding-left: 13.5px;
-}
-
 .add-button {
   position: absolute;
-  bottom: 15px;
-  right: 15px;
+  height: 52.25px;
+  right: 0;
+  border-radius: 0;
 }
 
-.table-wrapper {
+.mat-accordion {
+  height: 100%;
   overflow-y: auto;
-}
-
-.mat-cell {
-  cursor: pointer;
-  height: 48px;
-
-  word-wrap: initial;
-  display: table-cell;
-  line-break: unset;
-  white-space: nowrap;
-  overflow: hidden;
-}
-
-.mat-row {
-  display: table-row;
 }

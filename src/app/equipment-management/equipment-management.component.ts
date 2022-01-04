@@ -10,11 +10,16 @@ import {HttpService} from "../http.service";
 export class EquipmentManagementComponent implements OnInit {
   tempTestDB = {
     Devices: [
-
-      { id: 0, name: "Hantelbank", description: "Eine Hantelbank" },
-      { id: 1, name: "Crosstrainer", description: "Ein Crosstrainer" },
-      { id: 2, name: "Latzuggerät", description: "Ein Latzuggerät" }
-      ,{ id: 0, name: "Hantelbank", description: "Eine Hantelbank" },{ id: 0, name: "Hantelbank", description: "Eine Hantelbank" },{ id: 0, name: "Hantelbank", description: "Eine Hantelbank" },{ id: 0, name: "Hantelbank", description: "Eine Hantelbank" },{ id: 0, name: "Hantelbank", description: "Eine Hantelbank" },{ id: 0, name: "Hantelbank", description: "Eine Hantelbank" },{ id: 0, name: "Hantelbank", description: "Eine Hantelbank" },{ id: 0, name: "Hantelbank", description: "Eine Hantelbank" },{ id: 0, name: "Hantelbank", description: "Eine Hantelbank" },{ id: 0, name: "Hantelbank", description: "Eine Hantelbank" }
+      {id: 0, name: "Hantelbank", description: "Eine Hantelbank"},
+      {id: 1, name: "Crosstrainer", description: "Ein Crosstrainer"},
+      {id: 2, name: "Latzuggerät", description: "Ein Latzuggerät"},
+      {id: 3, name: "Stepper", description: "Ein Stepper"},
+      {id: 4, name: "Kabelzugstation", description: "Eine Kabelzugstation"}
+      //,{ id: 0, name: "Hantelbank", description: "Eine Hantelbank" },{ id: 0, name: "Hantelbank", description: "Eine
+      // Hantelbank" },{ id: 0, name: "Hantelbank", description: "Eine Hantelbank" },{ id: 0, name: "Hantelbank",
+      // description: "Eine Hantelbank" },{ id: 0, name: "Hantelbank", description: "Eine Hantelbank" },{ id: 0, name:
+      // "Hantelbank", description: "Eine Hantelbank" },{ id: 0, name: "Hantelbank", description: "Eine Hantelbank" },{
+      // id: 0, name: "Hantelbank", description: "Eine Hantelbank" }
     ]
   }
 
@@ -29,25 +34,38 @@ export class EquipmentManagementComponent implements OnInit {
   }
 
   updateFromDB() {
-    //this.http.getDevices().subscribe(data => this.allDevices = data);
+    //this.http.getDevices().subscribe(data => {
+    //  this.allDevices = data;
+    //  this.filterDevices();
+    //});
     this.allDevices = this.tempTestDB.Devices;
-    this.filterDevices();
+    this.filterAndSortDevices();
+  }
+
+  filterAndSortDevices() {
+    this.shownDevices =
+      (this.filterText === ""
+          ? this.allDevices.concat()
+          : this.allDevices.filter(d => d.name.toLowerCase().includes(this.filterText.toLowerCase()))
+      ).sort((d1, d2) => d1.name.localeCompare(d2.name));
+  }
+
+  createDevice(newDevice: DeviceType) {
+    //this.http.createDevice(newDevice).subscribe();
+    this.tempTestDB.Devices.push(newDevice);
+    this.updateFromDB();
+  }
+
+  updateDevice(newDevice: DeviceType) {
+    //this.http.updateDevice(newDevice).subscribe();
+    this.deleteDevice(newDevice.id);
+    this.createDevice(newDevice);
+    this.updateFromDB();
   }
 
   deleteDevice(id: number) {
     //this.http.deleteDevice(id).subscribe();
-    this.tempTestDB.Devices.splice(this.tempTestDB.Devices.findIndex(d => d.id == id), 1);
+    this.tempTestDB.Devices.splice(this.tempTestDB.Devices.findIndex(d => d.id === id), 1);
     this.updateFromDB();
-  }
-
-  editDevice(device: DeviceType) {
-    console.log("opening editing screen for " + device.name);
-  }
-
-  filterDevices() {
-    if (this.filterText === "")
-      this.shownDevices = this.allDevices.concat();
-    else
-      this.shownDevices = this.allDevices.filter(d => d.name.toLowerCase().includes(this.filterText.toLowerCase()));
   }
 }
