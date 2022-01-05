@@ -7,11 +7,19 @@
              (input)="filterAndSortDevices()">
     </mat-form-field>
     <mat-accordion>
+      <app-device *ngIf="newDevice != undefined"
+                  [device]="newDevice"
+                  [editOpen]="true"
+                  (delete)="newDeviceFinished(undefined)"
+                  (editFinished)="newDeviceFinished($event)"></app-device>
       <app-device *ngFor="let device of shownDevices"
                   [device]="device"
-                  (delete)="deleteDevice($event)" (editFinished)="updateDevice($event)"></app-device>
+                  (delete)="dbDeleteDevice($event)"
+                  (editFinished)="updateDevice($event)"></app-device>
     </mat-accordion>
-    <button mat-flat-button class="add-button" color="primary">
+    <button mat-flat-button color="primary"
+            class="add-button"
+            (click)="addNewDevice()">
       <mat-icon>add</mat-icon>
     </button>
   </mat-card>

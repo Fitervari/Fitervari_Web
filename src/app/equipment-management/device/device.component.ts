@@ -1,4 +1,13 @@
-import { Component, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
+import {
+  AfterContentChecked,
+  AfterContentInit,
+  AfterViewInit, ChangeDetectorRef,
+  Component,
+  EventEmitter,
+  Input,
+  Output,
+  ViewChild
+} from '@angular/core';
 import { DeviceType } from "../../model/deviceType";
 import { MatExpansionPanel } from "@angular/material/expansion";
 
@@ -7,7 +16,7 @@ import { MatExpansionPanel } from "@angular/material/expansion";
   templateUrl: './device.component.html',
   styleUrls: ['./device.component.scss']
 })
-export class DeviceComponent implements OnInit {
+export class DeviceComponent implements AfterViewInit {
   @ViewChild(MatExpansionPanel)
   panel!: MatExpansionPanel;
 
@@ -24,38 +33,35 @@ export class DeviceComponent implements OnInit {
   open: boolean = false;
   editingDevice?: DeviceType;
 
-  constructor() { }
+  constructor(private cdr: ChangeDetectorRef) { }
 
-  ngOnInit(): void {
-    if (this.editOpen)
-      this.toggleEditMode();
+  ngAfterViewInit(): void {
+    if (this.editOpen) {
+      this.startEditing();
+      this.cdr.detectChanges();
+    }
   }
 
-  toggleEditMode(cancel = false) {
-    if (cancel) {
-      if (this.device.name === "") {
-        this.deleteDevice();
-        return;
-      }
+  startEditing() {
+    this.panel.open();
+    this.editingDevice = Object.create(this.device);
+  }
 
-      if (this.editingDevice == undefined)
-        return;
+  stopEditing(saveChanges: boolean) {
+    if (this.editingDevice == undefined)
+      return;
 
-      this.panel.close();
-      this.editingDevice = undefined;
+    if (saveChanges) {
+      console.log(this.editingDevice);
+      this.editFinished.emit(this.editingDevice);
+      this.device = this.editingDevice;
     }
     else {
-      if (this.editingDevice == undefined) {
-        this.panel.open();
-        this.editingDevice = Object.create(this.device);
-      }
-      else {
-        this.editFinished.emit(this.editingDevice);
-        this.device = this.editingDevice;
-        this.panel.close();
-        this.editingDevice = undefined;
-      }
+      this.editFinished.emit(undefined);
     }
+
+    this.editingDevice = undefined;
+    this.panel.close();
   }
 
   deleteDevice() {

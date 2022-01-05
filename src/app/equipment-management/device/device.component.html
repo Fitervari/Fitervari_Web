@@ -1,23 +1,26 @@
-<mat-expansion-panel (closed)="toggleEditMode(true)">
+<mat-expansion-panel (closed)="stopEditing(false)">
   <mat-expansion-panel-header>
     <mat-panel-title fxLayoutAlign="space-between center">
-      <mat-form-field *ngIf="editingDevice != undefined; else name" appearance="standard">
-        <input (click)="$event.stopPropagation()"
-               [(ngModel)]="editingDevice.name"
-               matInput
-               placeholder="Name">
+      <mat-form-field appearance="standard"
+                      *ngIf="editingDevice != undefined; else name"
+                      (click)="$event.stopPropagation()">
+        <input matInput
+               placeholder="Name"
+               [(ngModel)]="editingDevice.name">
       </mat-form-field>
       <ng-template #name>
-        {{device.name}}
+        <span>
+          {{device.name}}
+        </span>
       </ng-template>
       <div>
-        <button (click)="toggleEditMode(); $event.stopPropagation()" *ngIf="!editingDevice" mat-icon-button>
+        <button mat-icon-button *ngIf="!editingDevice" (click)="startEditing(); $event.stopPropagation()">
           <mat-icon>edit</mat-icon>
         </button>
-        <button (click)="toggleEditMode(); $event.stopPropagation()" *ngIf="editingDevice" mat-icon-button>
+        <button mat-icon-button *ngIf="editingDevice" (click)="stopEditing(true); $event.stopPropagation()">
           <mat-icon>done</mat-icon>
         </button>
-        <button (click)="toggleEditMode(true); $event.stopPropagation()" *ngIf="editingDevice" mat-icon-button>
+        <button mat-icon-button *ngIf="editingDevice" (click)="stopEditing(false); $event.stopPropagation()">
           <mat-icon>clear</mat-icon>
         </button>
       </div>
@@ -25,13 +28,14 @@
   </mat-expansion-panel-header>
 
   <div fxLayoutAlign="space-between center">
-    <mat-form-field *ngIf="editingDevice != undefined; else description" appearance="standard"
-                    class="edit-description-form-field">
-      <textarea (click)="$event.stopPropagation()"
-                [(ngModel)]="editingDevice.description"
-                matInput
+    <mat-form-field appearance="standard"
+                    class="edit-description-form-field"
+                    *ngIf="editingDevice != undefined; else description"
+                    (click)="$event.stopPropagation()">
+      <textarea matInput
                 placeholder="Beschreibung"
-                rows="1"></textarea>
+                rows="1"
+                [(ngModel)]="editingDevice.description"></textarea>
     </mat-form-field>
     <ng-template #description>
       {{device.description}}
