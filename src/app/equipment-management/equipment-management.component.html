@@ -5,8 +5,13 @@
              placeholder="Suche"
              [(ngModel)]="filterText"
              (input)="filterAndSortDevices()">
+      <button mat-icon-button
+              matSuffix
+              (click)="addNewDevice()">
+        <mat-icon>add</mat-icon>
+      </button>
     </mat-form-field>
-    <mat-accordion>
+    <mat-accordion fxFlex>
       <app-device *ngIf="newDevice != undefined"
                   [device]="newDevice"
                   [editOpen]="true"
@@ -17,10 +22,5 @@
                   (delete)="dbDeleteDevice($event)"
                   (editFinished)="updateDevice($event)"></app-device>
     </mat-accordion>
-    <button mat-flat-button color="primary"
-            class="add-button"
-            (click)="addNewDevice()">
-      <mat-icon>add</mat-icon>
-    </button>
   </mat-card>
 </div>

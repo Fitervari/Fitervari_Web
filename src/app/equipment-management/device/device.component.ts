@@ -52,7 +52,6 @@ export class DeviceComponent implements AfterViewInit {
       return;
 
     if (saveChanges) {
-      console.log(this.editingDevice);
       this.editFinished.emit(this.editingDevice);
       this.device = this.editingDevice;
     }

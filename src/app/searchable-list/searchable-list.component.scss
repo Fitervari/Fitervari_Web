@@ -1,0 +1,11 @@
+input {
+  padding-left: 24px;
+}
+
+::ng-deep .mat-form-field-ripple {
+  display: none;
+}
+
+mat-accordion {
+  overflow-y: auto;
+}

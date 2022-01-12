@@ -22,6 +22,8 @@ import { MatRippleModule } from "@angular/material/core";
 import { OverlayModule } from "@angular/cdk/overlay";
 import { MatExpansionModule } from "@angular/material/expansion";
 import { DeviceComponent } from './equipment-management/device/device.component';
+import { SearchableListComponent } from './searchable-list/searchable-list.component';
+import { MatDividerModule } from "@angular/material/divider";
 
 @NgModule({
   declarations: [
@@ -30,26 +32,28 @@ import { DeviceComponent } from './equipment-management/device/device.component'
     WorkoutPlansComponent,
     EquipmentManagementComponent,
     LoginComponent,
-    DeviceComponent
+    DeviceComponent,
+    SearchableListComponent
   ],
-  imports: [
-    BrowserModule,
-    HttpClientModule,
-    AppRoutingModule,
-    FlexModule,
-    BrowserAnimationsModule,
-    MatToolbarModule,
-    MatButtonModule,
-    MatIconModule,
-    MatCardModule,
-    MatTableModule,
-    MatFormFieldModule,
-    MatInputModule,
-    FormsModule,
-    MatRippleModule,
-    OverlayModule,
-    MatExpansionModule
-  ],
+    imports: [
+        BrowserModule,
+        HttpClientModule,
+        AppRoutingModule,
+        FlexModule,
+        BrowserAnimationsModule,
+        MatToolbarModule,
+        MatButtonModule,
+        MatIconModule,
+        MatCardModule,
+        MatTableModule,
+        MatFormFieldModule,
+        MatInputModule,
+        FormsModule,
+        MatRippleModule,
+        OverlayModule,
+        MatExpansionModule,
+        MatDividerModule
+    ],
   providers: [],
   bootstrap: [AppComponent]
 })

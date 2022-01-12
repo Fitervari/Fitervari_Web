@@ -1,1 +1,8 @@
-<p>workout-plans works!</p>
+<div fxFill fxLayoutAlign="start">
+  <app-searchable-list class="user-list"
+                       [data]="users"
+                       [shownProperty]="nameProperty"
+                       (itemClick)="showPlans($event)"></app-searchable-list>
+  <mat-divider vertical></mat-divider>
+  <div fxFlex></div>
+</div>

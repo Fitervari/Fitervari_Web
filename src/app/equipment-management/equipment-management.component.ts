@@ -46,11 +46,10 @@ export class EquipmentManagementComponent implements OnInit {
   }
 
   filterAndSortDevices() {
-    this.shownDevices =
-      (this.filterText === ""
-          ? this.allDevices.concat()
-          : this.allDevices.filter(d => d.name.toLowerCase().includes(this.filterText.toLowerCase()))
-      ).sort((d1, d2) => d1.name.localeCompare(d2.name));
+    this.shownDevices = (this.filterText === ""
+        ? this.allDevices.concat()
+        : this.allDevices.filter(d => d.name.toLowerCase().includes(this.filterText.toLowerCase()))
+    ).sort((d1, d2) => d1.name.localeCompare(d2.name));
   }
 
   addNewDevice() {

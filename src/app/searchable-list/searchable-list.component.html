@@ -1,0 +1,15 @@
+<div fxLayout="column" fxLayoutAlign="start stretch">
+  <mat-form-field appearance="standard">
+    <input matInput
+           placeholder="Suche"
+           [(ngModel)]="filterText"
+           (input)="filterAndSort()">
+  </mat-form-field>
+  <mat-accordion>
+    <mat-expansion-panel *ngFor="let d of shownData" hideToggle>
+      <mat-expansion-panel-header>
+        {{shownProperty(d)}}
+      </mat-expansion-panel-header>
+    </mat-expansion-panel>
+  </mat-accordion>
+</div>
