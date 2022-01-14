@@ -1,11 +1,11 @@
-<div fxLayout="column" fxLayoutAlign="start stretch">
+<div fxFlex fxLayout="column" fxLayoutAlign="start stretch">
   <mat-form-field appearance="standard">
     <input matInput
            placeholder="Suche"
            [(ngModel)]="filterText"
            (input)="filterAndSort()">
   </mat-form-field>
-  <mat-accordion>
+  <mat-accordion fxFlex>
     <mat-expansion-panel *ngFor="let d of shownData" hideToggle>
       <mat-expansion-panel-header>
         {{shownProperty(d)}}
