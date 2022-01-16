@@ -30,7 +30,14 @@ export class WorkoutPlansComponent implements OnInit {
     { id: 20, name: "Kadie Wormald" },
     { id: 21, name: "Kelsi Bull" }
   ];
+  workoutPlans: any[][] = [
+    [{ name: "Beintraining" }, { name: "Oberkörpertraining" }, { name: "Oberkörpertraining" }, { name: "Oberkörpertraining" }, { name: "Oberkörpertraining" }, { name: "Oberkörpertraining" }, { name: "Oberkörpertraining" }, { name: "Oberkörpertraining" }, { name: "Oberkörpertraining" }],
+    [],
+    []
+  ]
+
   nameProperty = (u: User) => u.name;
+  selectedUser = 0;
 
   constructor() { }
 

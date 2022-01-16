@@ -1,3 +1,21 @@
+app-searchable-list {
+  resize: horizontal;
+  width: 20vw;
+  min-width: 300px;
+}
+
 mat-divider {
   background-color: rgba(0, 0, 0, 0.42);
+}
+
+.plan {
+  width: 300px;
+}
+
+.plans {
+  overflow-x: scroll;
+}
+
+.plan-title {
+  padding: 10px;
 }
