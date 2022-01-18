@@ -33,21 +33,24 @@ export class WorkoutPlansComponent implements OnInit {
   workoutPlans: any[][] = [
     [
       {
-        name: "Beintraining", exercises: [
+        name: "Beintraining",
+        exercises: [
           { device: { id: 1, name: "Beinpresse", description: "Lorem ipsum dolor sit amet" } },
           { device: { id: 1, name: "Beinpresse", description: "Lorem ipsum dolor sit amet" } },
           { device: { id: 1, name: "Beinpresse", description: "Lorem ipsum dolor sit amet" } }
         ]
       },
       {
-        name: "Beintraining", exercises: [
+        name: "Beintraining",
+        exercises: [
           { device: { id: 1, name: "Beinpresse", description: "Lorem ipsum dolor sit amet" } },
           { device: { id: 1, name: "Beinpresse", description: "Lorem ipsum dolor sit amet" } },
           { device: { id: 1, name: "Beinpresse", description: "Lorem ipsum dolor sit amet" } }
         ]
       },
       {
-        name: "Beintraining", exercises: [
+        name: "Beintraining",
+        exercises: [
           { device: { id: 1, name: "Beinpresse", description: "Lorem ipsum dolor sit amet" } },
           { device: { id: 1, name: "Beinpresse", description: "Lorem ipsum dolor sit amet" } },
           { device: { id: 1, name: "Beinpresse", description: "Lorem ipsum dolor sit amet" } }

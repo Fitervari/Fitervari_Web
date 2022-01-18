@@ -1,0 +1,46 @@
+h1, h2, h3, h4 {
+  margin-bottom: 0;
+}
+
+app-searchable-list {
+  resize: horizontal;
+  width: 20vw;
+  min-width: 300px;
+}
+
+mat-divider {
+  background-color: rgba(0, 0, 0, 0.42);
+}
+
+.workout {
+  width: 300px;
+}
+
+.plans {
+  overflow-x: auto;
+}
+
+.workout-title {
+  padding: 20px;
+  font-size: 32px;
+  text-align: center;
+}
+
+.exercise {
+  margin: 10px;
+  padding: 5px 10px;
+  border-radius: 5px;
+
+  color: white;
+  background-color: #5c8aff;
+}
+
+.exercise-title {
+  padding: 3px 0;
+}
+
+.set {
+  font-weight: lighter;
+  font-size: 18px;
+  padding: 3px 0;
+}

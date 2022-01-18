@@ -1,1 +1,32 @@
-<p>workout-data works!</p>
+<div style="resize: both" fxFill fxLayoutAlign="start">
+  <app-searchable-list
+    [data]="users"
+    [shownProperty]="nameProperty"
+    (itemClick)="showPlans($event)"></app-searchable-list>
+  <mat-divider vertical></mat-divider>
+  <div class="plans" fxFlex fxLayoutAlign="start stretch">
+    <div *ngFor="let workout of workouts[selectedUser]">
+      <div class="workout" fxFlex fxLayout="column" fxLayoutAlign="start stretch">
+        <h1 class="workout-title">
+          {{workout.date}}
+        </h1>
+        <div fxFlex fxLayout="column" fxLayoutAlign="start stretch">
+          <div class="exercise" *ngFor="let exercise of workout.exercises" fxLayout="column" fxLayoutAlign="start">
+            <div class="exercise-title" fxLayoutAlign="space-between">
+              <h2>
+                {{exercise.device.name}}
+              </h2>
+              <h2>
+                {{exercise.startTime}} - {{exercise.endTime}}
+              </h2>
+            </div>
+            <div class="set" *ngFor="let set of exercise.sets">
+              {{set.repetitions}}x&nbsp; {{set.setting}} {{set.unit}}
+            </div>
+          </div>
+        </div>
+      </div>
+      <mat-divider vertical></mat-divider>
+    </div>
+  </div>
+</div>
