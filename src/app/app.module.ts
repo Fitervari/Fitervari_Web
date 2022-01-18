@@ -24,6 +24,7 @@ import { MatExpansionModule } from "@angular/material/expansion";
 import { DeviceComponent } from './equipment-management/device/device.component';
 import { SearchableListComponent } from './searchable-list/searchable-list.component';
 import { MatDividerModule } from "@angular/material/divider";
+import { WorkoutDataComponent } from './workout-data/workout-data.component';
 
 @NgModule({
   declarations: [
@@ -33,7 +34,8 @@ import { MatDividerModule } from "@angular/material/divider";
     EquipmentManagementComponent,
     LoginComponent,
     DeviceComponent,
-    SearchableListComponent
+    SearchableListComponent,
+    WorkoutDataComponent
   ],
     imports: [
         BrowserModule,
