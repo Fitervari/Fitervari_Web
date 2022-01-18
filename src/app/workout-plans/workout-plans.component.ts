@@ -31,9 +31,29 @@ export class WorkoutPlansComponent implements OnInit {
     { id: 21, name: "Kelsi Bull" }
   ];
   workoutPlans: any[][] = [
-    [{ name: "Beintraining" }, { name: "Oberkörpertraining" }, { name: "Oberkörpertraining" }, { name: "Oberkörpertraining" }, { name: "Oberkörpertraining" }, { name: "Oberkörpertraining" }, { name: "Oberkörpertraining" }, { name: "Oberkörpertraining" }, { name: "Oberkörpertraining" }],
-    [],
-    []
+    [
+      {
+        name: "Beintraining", exercises: [
+          { device: { id: 1, name: "Beinpresse", description: "Lorem ipsum dolor sit amet" } },
+          { device: { id: 1, name: "Beinpresse", description: "Lorem ipsum dolor sit amet" } },
+          { device: { id: 1, name: "Beinpresse", description: "Lorem ipsum dolor sit amet" } }
+        ]
+      },
+      {
+        name: "Beintraining", exercises: [
+          { device: { id: 1, name: "Beinpresse", description: "Lorem ipsum dolor sit amet" } },
+          { device: { id: 1, name: "Beinpresse", description: "Lorem ipsum dolor sit amet" } },
+          { device: { id: 1, name: "Beinpresse", description: "Lorem ipsum dolor sit amet" } }
+        ]
+      },
+      {
+        name: "Beintraining", exercises: [
+          { device: { id: 1, name: "Beinpresse", description: "Lorem ipsum dolor sit amet" } },
+          { device: { id: 1, name: "Beinpresse", description: "Lorem ipsum dolor sit amet" } },
+          { device: { id: 1, name: "Beinpresse", description: "Lorem ipsum dolor sit amet" } }
+        ]
+      }
+    ]
   ]
 
   nameProperty = (u: User) => u.name;

@@ -6,10 +6,17 @@
   <mat-divider vertical></mat-divider>
   <div class="plans" fxFlex fxLayoutAlign="start stretch">
     <div *ngFor="let plan of workoutPlans[selectedUser]">
-      <div class="plan" fxFlex fxLayout="column" fxLayoutAlign="start center">
+      <div class="plan" fxFlex fxLayout="column" fxLayoutAlign="start stretch">
         <h1 class="plan-title">
           {{plan.name}}
         </h1>
+        <div fxFlex fxLayout="column" fxLayoutAlign="start stretch">
+          <div class="exercise" *ngFor="let exercise of plan.exercises">
+            <h2>
+              {{exercise.device.name}}
+            </h2>
+          </div>
+        </div>
       </div>
       <mat-divider vertical></mat-divider>
     </div>
