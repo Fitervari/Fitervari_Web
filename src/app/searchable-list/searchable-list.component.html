@@ -6,7 +6,7 @@
            (input)="filterAndSort()">
   </mat-form-field>
   <mat-accordion fxFlex>
-    <mat-expansion-panel *ngFor="let d of shownData" hideToggle>
+    <mat-expansion-panel *ngFor="let d of shownData; let i = index" hideToggle (opened)="onItemOpen(d, i)">
       <mat-expansion-panel-header>
         {{shownProperty(d)}}
       </mat-expansion-panel-header>
