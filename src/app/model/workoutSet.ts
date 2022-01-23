@@ -1,8 +1,8 @@
 export class WorkoutSet {
   constructor(
-    public id: number = 0,
     public repetitions: number,
     public setting: number,
-    public unit: string
+    public unit: string,
+    public id: number = 0,
   ) {}
 }

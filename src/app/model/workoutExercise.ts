@@ -4,9 +4,9 @@ import { WorkoutPlan } from "./workoutPlan";
 
 export class WorkoutExercise {
   constructor(
-    public id: number = 0,
     public device: DeviceType,
     public plan: WorkoutPlan,
-    public sets: WorkoutSet[] = []
+    public sets: WorkoutSet[] = [],
+    public id: number = 0,
   ) {}
 }
