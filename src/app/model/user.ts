@@ -7,7 +7,6 @@ export class User {
     public email: string = "",
     public address: string = "",
     public birthdate: Date = new Date(),
-    public plans: WorkoutPlan[] = [],
     public id: number = 0,
   ) {}
 }
