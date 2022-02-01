@@ -2,10 +2,10 @@
   <app-searchable-list
     [data]="database.users"
     [shownProperty]="nameProperty"
-    (itemClick)="showPlans($event)"></app-searchable-list>
+    (itemClick)="selectUser($event)"></app-searchable-list>
   <mat-divider vertical></mat-divider>
   <div class="plans" fxFlex fxLayoutAlign="start stretch">
-    <div *ngFor="let plan of database.workoutPlans.get(selectedUser)">
+    <div *ngFor="let plan of database.workoutPlans.get(selectedUser.id)">
       <div class="plan" fxFlex fxLayout="column" fxLayoutAlign="start stretch">
         <h1 class="plan-title">
           {{plan.name}}

@@ -16,7 +16,7 @@ export class EquipmentManagementComponent implements OnInit {
   constructor(public database: DatabaseService) { }
 
   ngOnInit(): void {
-    this.database.getDevices();
+    this.database.getDevices(() => this.filterAndSortDevices());
   }
 
   filterAndSortDevices() {

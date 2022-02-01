@@ -13,7 +13,7 @@ mat-divider {
 }
 
 .workout {
-  width: 300px;
+  width: 400px;
 }
 
 .plans {
@@ -43,4 +43,9 @@ mat-divider {
   font-weight: lighter;
   font-size: 18px;
   padding: 3px 0;
+}
+
+.repetitions {
+  display: inline-block;
+  width: 2.4em;
 }

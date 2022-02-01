@@ -1,29 +1,81 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from "@angular/common/http";
 import { DeviceType } from "./model/deviceType";
+import { User } from "./model/user";
+import { WorkoutPlan } from "./model/workoutPlan";
+import { Workout } from "./model/workout";
 
 @Injectable({
   providedIn: 'root'
 })
 export class HttpService {
   private baseurl = "https://student.cloud.htl-leonding.ac.at/m.rausch-schott/fitervari/api";
-  private deviceTypesUrl = `${this.baseurl}/deviceGroups`;
 
   constructor(private http: HttpClient) { }
 
+  private getDeviceUrl() {
+    return `${this.baseurl}/deviceGroups`;
+  }
+
+  private getUserUrl(by?: number) {
+    const url = `${this.baseurl}/users`;
+
+    return by != undefined ? `${url}/${by}` : url;
+  }
+
+  private getWorkoutPlanUrl(by?: number | User) {
+    const url = `${this.baseurl}/workoutPlans`;
+
+    if (by != undefined) {
+      if (typeof(by) == "number")
+        return `${url}/${by}`;
+      return `${this.getUserUrl(by.id)}/workoutPlans`;
+    }
+    return url;
+  }
+
+  private getWorkoutUrl(by?: number | WorkoutPlan) {
+    const url = `${this.baseurl}/workoutSessions`;
+
+    if (by != undefined) {
+      if (typeof(by) == "number")
+        return `${url}/${by}`;
+      return `${this.getWorkoutPlanUrl(by.id)}/workoutSessions`;
+    }
+    return url;
+  }
+
+
+  getUsers() {
+    return this.http.get<User[]>(this.getUserUrl());
+  }
+
+
   getDevices() {
-    return this.http.get<DeviceType[]>(this.deviceTypesUrl);
+    return this.http.get<DeviceType[]>(this.getDeviceUrl());
   }
 
   createDevice(device: DeviceType) {
-    return this.http.post(this.deviceTypesUrl, device);
+    return this.http.post(this.getDeviceUrl(), device);
   }
 
   updateDevice(device: DeviceType) {
-    return this.http.put(this.deviceTypesUrl, device);
+    return this.http.put(this.getDeviceUrl(), device);
   }
 
   deleteDevice(id: number) {
-    return this.http.delete(`${this.deviceTypesUrl}/${id}`);
+    return this.http.delete(`${this.getDeviceUrl()}/${id}`);
+  }
+
+
+  getWorkoutPlans(user: User) {
+    console.log(this.getWorkoutPlanUrl(user));
+    return this.http.get<WorkoutPlan[]>(this.getWorkoutPlanUrl(user));
+  }
+
+
+  getWorkouts(plan: WorkoutPlan) {
+    console.log(this.getWorkoutUrl(plan));
+    return this.http.get<Workout[]>(this.getWorkoutUrl(plan));
   }
 }

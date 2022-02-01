@@ -3,7 +3,7 @@ import { DeviceType } from "./model/deviceType";
 import { User } from "./model/user";
 import { HttpService } from "./http.service";
 import { WorkoutPlan } from "./model/workoutPlan";
-import { WorkoutExercise } from "./model/workoutExercise";
+import { Workout } from "./model/workout";
 
 @Injectable({
   providedIn: 'root'
@@ -27,7 +27,7 @@ export class DatabaseService {
     new DeviceType("Hantelbank")
   ];
   users: User[] = [
-    new User("Annalise", "Prentice", "", "", new Date(), 1),
+    new User("Annalise", "Prentice", 1),
     new User("Harold", "Reader"),
     new User("Mia-Rose", "Padilla"),
     new User("Kain", "Allman"),
@@ -58,11 +58,11 @@ export class DatabaseService {
             [
               {
                 description: "",
-                sets: [
+                exerciseSets: [
                   {
                     description: "30kg",
                     id: 1,
-                    repetitions: 5
+                    repetitions: 500
                   },
                   {
                     description: "10kg",
@@ -76,18 +76,16 @@ export class DatabaseService {
                   }
                 ],
                 id: 1,
-                device: this.devices[4],
+                deviceGroup: this.devices[4],
                 name: "Beinpressen",
               }]
           )
         ]
       ]
     ]);
+  workouts: Map<number, Workout[]> = new Map<number, Workout[]>();
 
-  constructor(private http: HttpService) {
-    //TODO: remove once db access is working
-    this.devices.forEach((d, i) => d.id = i + 1);
-  }
+  constructor(private http: HttpService) { }
 
   compare(o1: any, o2: any) {
     if ('id' in o1 && 'id' in o2)
@@ -95,19 +93,47 @@ export class DatabaseService {
     return o1 == o2;
   }
 
-  getDevices() {
-    this.http.getDevices().subscribe(data => this.devices = data);
+
+  getUsers(callback: (() => void) = () => { }) {
+    this.http.getUsers().subscribe(data => {
+      this.users = data;
+      callback();
+    })
   }
 
-  createDevice(device: DeviceType) {
-    this.http.createDevice(device).subscribe(_ => this.getDevices());
+
+  getDevices(callback: (() => void) = () => { }) {
+    this.http.getDevices().subscribe(data => {
+      this.devices = data;
+      callback();
+    });
   }
 
-  updateDevice(device: DeviceType) {
-    this.http.updateDevice(device).subscribe(_ => this.getDevices());
+  createDevice(device: DeviceType, callback: (() => void) = () => { }) {
+    this.http.createDevice(device).subscribe(_ => this.getDevices(callback));
   }
 
-  deleteDevice(id: number) {
-    this.http.deleteDevice(id).subscribe(_ => this.getDevices());
+  updateDevice(device: DeviceType, callback: (() => void) = () => { }) {
+    this.http.updateDevice(device).subscribe(_ => this.getDevices(callback));
+  }
+
+  deleteDevice(id: number, callback: (() => void) = () => { }) {
+    this.http.deleteDevice(id).subscribe(_ => this.getDevices(callback));
+  }
+
+
+  getWorkoutPlans(user: User, callback: (() => void) = () => {}) {
+    this.http.getWorkoutPlans(user).subscribe(data => {
+      this.workoutPlans.set(user.id, data);
+      callback();
+    });
+  }
+
+
+  getWorkouts(plan: WorkoutPlan, callback: (() => void) = () => {}) {
+    this.http.getWorkouts(plan).subscribe(data => {
+      this.workouts.set(plan.id, data);
+      callback();
+    })
   }
 }

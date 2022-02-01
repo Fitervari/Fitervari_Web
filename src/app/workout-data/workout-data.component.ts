@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { User } from "../model/user";
 import { DatabaseService } from "../database.service";
+import { Workout } from "../model/workout";
+import { WorkoutExercise } from "../model/workoutExercise";
+import { WorkoutPlan } from "../model/workoutPlan";
 
 @Component({
   selector: 'app-workout-data',
@@ -8,153 +11,32 @@ import { DatabaseService } from "../database.service";
   styleUrls: ['./workout-data.component.scss']
 })
 export class WorkoutDataComponent implements OnInit {
-  workouts: any[][] = [
-    [
-      {
-        date: "Mo, 6.12.",
-        exercises: [
-          {
-            device: { id: 1, name: "Hantelbank", description: "Lorem ipsum dolor sit amet" },
-            startTime: "15:44",
-            endTime: "15:48",
-            sets: [
-              {
-                repetitions: 10,
-                setting: 40,
-                unit: "kg"
-              },
-              {
-                repetitions: 20,
-                setting: 30,
-                unit: "kg"
-              }
-            ]
-          },
-          {
-            device: { id: 1, name: "Hantelbank", description: "Lorem ipsum dolor sit amet" },
-            startTime: "15:44",
-            endTime: "15:48",
-            sets: [
-              {
-                repetitions: 10,
-                setting: 40,
-                unit: "kg"
-              },
-              {
-                repetitions: 20,
-                setting: 30,
-                unit: "kg"
-              }
-            ]
-          },
-          {
-            device: { id: 1, name: "Hantelbank", description: "Lorem ipsum dolor sit amet" },
-            startTime: "15:44",
-            endTime: "15:48",
-            sets: [
-              {
-                repetitions: 10,
-                setting: 40,
-                unit: "kg"
-              },
-              {
-                repetitions: 20,
-                setting: 30,
-                unit: "kg"
-              }
-            ]
-          }
-        ]
-      },
-      {
-        date: "Mi, 8.12.",
-        exercises: [
-          {
-            device: { id: 1, name: "Hantelbank", description: "Lorem ipsum dolor sit amet" },
-            startTime: "15:44",
-            endTime: "15:48",
-            sets: [
-              {
-                repetitions: 10,
-                setting: 40,
-                unit: "kg"
-              },
-              {
-                repetitions: 20,
-                setting: 30,
-                unit: "kg"
-              }
-            ]
-          }
-        ]
-      },
-      {
-        date: "Fr, 10.12.",
-        exercises: [
-          {
-            device: { id: 1, name: "Hantelbank", description: "Lorem ipsum dolor sit amet" },
-            startTime: "15:44",
-            endTime: "15:48",
-            sets: [
-              {
-                repetitions: 10,
-                setting: 40,
-                unit: "kg"
-              },
-              {
-                repetitions: 20,
-                setting: 30,
-                unit: "kg"
-              }
-            ]
-          },
-          {
-            device: { id: 1, name: "Hantelbank", description: "Lorem ipsum dolor sit amet" },
-            startTime: "15:44",
-            endTime: "15:48",
-            sets: [
-              {
-                repetitions: 10,
-                setting: 40,
-                unit: "kg"
-              },
-              {
-                repetitions: 20,
-                setting: 30,
-                unit: "kg"
-              }
-            ]
-          },
-          {
-            device: { id: 1, name: "Hantelbank", description: "Lorem ipsum dolor sit amet" },
-            startTime: "15:44",
-            endTime: "15:48",
-            sets: [
-              {
-                repetitions: 10,
-                setting: 40,
-                unit: "kg"
-              },
-              {
-                repetitions: 20,
-                setting: 30,
-                unit: "kg"
-              }
-            ]
-          }
-        ]
-      }
-    ]
-  ] //TODO: move to database service
+  shownPlans: WorkoutPlan[] = [];
 
-  nameProperty = (u: User) => `${u.firstname} ${u.lastname}`;
-  selectedUser = 0;
+  nameProperty = (u: User) => `${u.firstName} ${u.lastName}`;
+  selectedUser: User = new User("", "");
 
   constructor(public database: DatabaseService) { }
 
-  ngOnInit(): void { }
+  ngOnInit(): void {
+    this.selectUser(this.database.users[0]);
+  }
 
-  showPlans(user: User) {
-    console.log(user);
+  selectUser(user: User) {
+    this.selectedUser = user;
+    this.database.getWorkoutPlans(this.selectedUser, () => {
+      let plans = this.database.workoutPlans.get(this.selectedUser.id)!;
+      for (let i = 0; i < plans.length; i++) {
+        this.database.getWorkouts(plans[i], () => {
+          if (i == plans.length - 1)
+            this.shownPlans = plans;
+        });
+      }
+    });
+  }
+
+  showWorkoutDetail(workout: Workout, exercise?: WorkoutExercise) {
+    console.log(workout);
+    console.log(exercise);
   }
 }

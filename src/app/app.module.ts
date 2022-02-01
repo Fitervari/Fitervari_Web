@@ -27,6 +27,7 @@ import { MatDividerModule } from "@angular/material/divider";
 import { WorkoutDataComponent } from './workout-data/workout-data.component';
 import { ExerciseComponent } from './workout-plans/exercise/exercise.component';
 import { MatSelectModule } from "@angular/material/select";
+import { HttpService } from "./http.service";
 
 @NgModule({
   declarations: [

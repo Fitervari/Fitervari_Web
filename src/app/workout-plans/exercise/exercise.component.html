@@ -32,13 +32,13 @@
       <mat-form-field appearance="standard"
                       *ngIf="editingExercise != undefined; else device"
                       (click)="$event.stopPropagation()">
-        <mat-select placeholder="Device" [(ngModel)]="exercise.device" [compareWith]="database.compare">
+        <mat-select placeholder="Device" [(ngModel)]="exercise.deviceGroup" [compareWith]="database.compare">
           <mat-option *ngFor="let device of database.devices" [value]="device">{{device.name}}</mat-option>
         </mat-select>
       </mat-form-field>
       <ng-template #device>
       <span>
-        {{exercise.device.name}}
+        {{exercise.deviceGroup.name}}
       </span>
       </ng-template>
       <button (click)="deleteExercise()" mat-icon-button>
@@ -57,7 +57,7 @@
       {{exercise.description}}
     </ng-template>
     <div fxLayout="column" fxLayoutAlign="start stretch">
-      <div *ngFor="let set of editingExercise == undefined ? exercise.sets : editingExercise.sets">
+      <div *ngFor="let set of editingExercise == undefined ? exercise.exerciseSets : editingExercise.exerciseSets">
         <mat-form-field appearance="standard"
                         *ngIf="editingExercise != undefined; else workoutSet"
                         (click)="$event.stopPropagation()">
