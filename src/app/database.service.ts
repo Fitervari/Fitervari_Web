@@ -4,6 +4,9 @@ import { User } from "./model/user";
 import { HttpService } from "./http.service";
 import { WorkoutPlan } from "./model/workoutPlan";
 import { Workout } from "./model/workout";
+import { WorkoutDataType } from "./model/workoutDataType";
+import { WorkoutExercise } from "./model/workoutExercise";
+import { WorkoutData } from "./model/workoutData";
 
 @Injectable({
   providedIn: 'root'
@@ -50,40 +53,41 @@ export class DatabaseService {
     new User("Kelsi", "Bull"),
   ];
   workoutPlans: Map<number, WorkoutPlan[]> = new Map<number, WorkoutPlan[]>([
+    [
+      1,
       [
-        1,
-        [
-          new WorkoutPlan(
-            "Beintraining",
-            [
-              {
-                description: "",
-                exerciseSets: [
-                  {
-                    description: "30kg",
-                    id: 1,
-                    repetitions: 500
-                  },
-                  {
-                    description: "10kg",
-                    id: 3,
-                    repetitions: 20
-                  },
-                  {
-                    description: "40kg",
-                    id: 2,
-                    repetitions: 10
-                  }
-                ],
-                id: 1,
-                deviceGroup: this.devices[4],
-                name: "Beinpressen",
-              }]
-          )
-        ]
+        new WorkoutPlan(
+          "Beintraining",
+          [
+            {
+              description: "",
+              exerciseSets: [
+                {
+                  description: "30kg",
+                  id: 1,
+                  repetitions: 500
+                },
+                {
+                  description: "10kg",
+                  id: 3,
+                  repetitions: 20
+                },
+                {
+                  description: "40kg",
+                  id: 2,
+                  repetitions: 10
+                }
+              ],
+              id: 1,
+              deviceGroup: this.devices[4],
+              name: "Beinpressen",
+            }]
+        )
       ]
-    ]);
+    ]
+  ]);
   workouts: Map<number, Workout[]> = new Map<number, Workout[]>();
+  workoutData: WorkoutData[] = [];
 
   constructor(private http: HttpService) { }
 
@@ -122,7 +126,7 @@ export class DatabaseService {
   }
 
 
-  getWorkoutPlans(user: User, callback: (() => void) = () => {}) {
+  getWorkoutPlans(user: User, callback: (() => void) = () => { }) {
     this.http.getWorkoutPlans(user).subscribe(data => {
       this.workoutPlans.set(user.id, data);
       callback();
@@ -130,10 +134,28 @@ export class DatabaseService {
   }
 
 
-  getWorkouts(plan: WorkoutPlan, callback: (() => void) = () => {}) {
+  getWorkouts(plan: WorkoutPlan, callback: (() => void) = () => { }) {
     this.http.getWorkouts(plan).subscribe(data => {
       this.workouts.set(plan.id, data);
       callback();
     })
+  }
+
+
+  getWorkoutData(type?: WorkoutDataType, workout?: Workout, exercise?: WorkoutExercise,
+                 callback: (() => void) = () => { }) {
+    let args: [string, number][] = [];
+
+    if (type != undefined)
+      args.push(['type', type.id]);
+    if (workout != undefined)
+      args.push(['workout', workout.id]);
+    if (exercise != undefined)
+      args.push(['exercise', exercise.id]);
+
+    this.http.getWorkoutData(new Map<string, number>(args)).subscribe(data => {
+      this.workoutData = data;
+      callback();
+    });
   }
 }

@@ -1,4 +1,4 @@
-import { WorkoutDataType } from "./workout-data-type";
+import { WorkoutDataType } from "./workoutDataType";
 
 export class WorkoutData {
   constructor(

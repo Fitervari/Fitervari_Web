@@ -4,6 +4,9 @@ import { DeviceType } from "./model/deviceType";
 import { User } from "./model/user";
 import { WorkoutPlan } from "./model/workoutPlan";
 import { Workout } from "./model/workout";
+import { WorkoutExercise } from "./model/workoutExercise";
+import { WorkoutDataType } from "./model/workoutDataType";
+import { WorkoutData } from "./model/workoutData";
 
 @Injectable({
   providedIn: 'root'
@@ -45,6 +48,21 @@ export class HttpService {
     return url;
   }
 
+  getWorkoutDataUrl(args: Map<string, number>) {
+    let url = `${this.baseurl}/healthdata`;
+
+    if (args.size > 0) {
+      let argsString = "";
+
+      for (let [key, value] of args)
+        argsString += `&${key}=${value}`;
+
+      url += argsString.replace('&', '?');
+    }
+
+    return url;
+  }
+
 
   getUsers() {
     return this.http.get<User[]>(this.getUserUrl());
@@ -77,5 +95,11 @@ export class HttpService {
   getWorkouts(plan: WorkoutPlan) {
     console.log(this.getWorkoutUrl(plan));
     return this.http.get<Workout[]>(this.getWorkoutUrl(plan));
+  }
+
+
+  getWorkoutData(args: Map<string, number>) {
+    console.log(this.getWorkoutDataUrl(args));
+    return this.http.get<WorkoutData[]>(this.getWorkoutDataUrl(args));
   }
 }

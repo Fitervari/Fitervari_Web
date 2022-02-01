@@ -4,6 +4,7 @@ import { DatabaseService } from "../database.service";
 import { Workout } from "../model/workout";
 import { WorkoutExercise } from "../model/workoutExercise";
 import { WorkoutPlan } from "../model/workoutPlan";
+import { WorkoutDataType } from "../model/workoutDataType";
 
 @Component({
   selector: 'app-workout-data',
@@ -36,7 +37,11 @@ export class WorkoutDataComponent implements OnInit {
   }
 
   showWorkoutDetail(workout: Workout, exercise?: WorkoutExercise) {
-    console.log(workout);
-    console.log(exercise);
+    this.database.getWorkoutData(new WorkoutDataType("Puls", 1), workout, exercise, () => {
+      let message = 'Puls:\n';
+      for (let data of this.database.workoutData)
+        message += `${data.time}: ${data.value}\n`;
+      alert(message);
+    });
   }
 }
