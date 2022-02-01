@@ -19,8 +19,8 @@
                   (editFinished)="newDeviceFinished($event)"></app-device>
       <app-device *ngFor="let device of shownDevices"
                   [device]="device"
-                  (delete)="dbDeleteDevice($event)"
-                  (editFinished)="updateDevice($event)"></app-device>
+                  (delete)="database.deleteDevice($event)"
+                  (editFinished)="editDevice($event)"></app-device>
     </mat-accordion>
   </mat-card>
 </div>

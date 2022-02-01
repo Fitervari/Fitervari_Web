@@ -1,22 +1,18 @@
 <div style="resize: both" fxFill fxLayoutAlign="start">
   <app-searchable-list
-                       [data]="users"
-                       [shownProperty]="nameProperty"
-                       (itemClick)="showPlans($event)"></app-searchable-list>
+    [data]="database.users"
+    [shownProperty]="nameProperty"
+    (itemClick)="showPlans($event)"></app-searchable-list>
   <mat-divider vertical></mat-divider>
   <div class="plans" fxFlex fxLayoutAlign="start stretch">
-    <div *ngFor="let plan of workoutPlans[selectedUser]">
+    <div *ngFor="let plan of database.workoutPlans.get(selectedUser)">
       <div class="plan" fxFlex fxLayout="column" fxLayoutAlign="start stretch">
         <h1 class="plan-title">
           {{plan.name}}
         </h1>
-        <div fxFlex fxLayout="column" fxLayoutAlign="start stretch">
-          <div class="exercise" *ngFor="let exercise of plan.exercises">
-            <h2>
-              {{exercise.device.name}}
-            </h2>
-          </div>
-        </div>
+        <mat-accordion>
+          <app-exercise *ngFor="let exercise of plan.exercises" [exercise]="exercise"></app-exercise>
+        </mat-accordion>
       </div>
       <mat-divider vertical></mat-divider>
     </div>

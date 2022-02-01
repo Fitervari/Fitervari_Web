@@ -1,6 +1,4 @@
 import {
-  AfterContentChecked,
-  AfterContentInit,
   AfterViewInit, ChangeDetectorRef,
   Component,
   EventEmitter,
@@ -30,7 +28,6 @@ export class DeviceComponent implements AfterViewInit {
   @Output()
   delete = new EventEmitter<number>();
 
-  open: boolean = false;
   editingDevice?: DeviceType;
 
   constructor(private cdr: ChangeDetectorRef) { }

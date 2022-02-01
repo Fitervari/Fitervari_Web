@@ -38,7 +38,9 @@
                 [(ngModel)]="editingDevice.description"></textarea>
     </mat-form-field>
     <ng-template #description>
-      {{device.description}}
+      <span>
+        {{device.description}}
+      </span>
     </ng-template>
     <button (click)="deleteDevice()" mat-icon-button>
       <mat-icon>delete</mat-icon>

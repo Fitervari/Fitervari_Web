@@ -25,6 +25,8 @@ import { DeviceComponent } from './equipment-management/device/device.component'
 import { SearchableListComponent } from './searchable-list/searchable-list.component';
 import { MatDividerModule } from "@angular/material/divider";
 import { WorkoutDataComponent } from './workout-data/workout-data.component';
+import { ExerciseComponent } from './workout-plans/exercise/exercise.component';
+import { MatSelectModule } from "@angular/material/select";
 
 @NgModule({
   declarations: [
@@ -35,7 +37,8 @@ import { WorkoutDataComponent } from './workout-data/workout-data.component';
     LoginComponent,
     DeviceComponent,
     SearchableListComponent,
-    WorkoutDataComponent
+    WorkoutDataComponent,
+    ExerciseComponent
   ],
     imports: [
         BrowserModule,
@@ -54,7 +57,8 @@ import { WorkoutDataComponent } from './workout-data/workout-data.component';
         MatRippleModule,
         OverlayModule,
         MatExpansionModule,
-        MatDividerModule
+        MatDividerModule,
+        MatSelectModule
     ],
   providers: [],
   bootstrap: [AppComponent]

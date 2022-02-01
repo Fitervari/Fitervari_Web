@@ -1,0 +1,76 @@
+<mat-expansion-panel (closed)="stopEditing(false)">
+  <mat-expansion-panel-header>
+    <mat-panel-title fxLayoutAlign="space-between center">
+      <mat-form-field appearance="standard"
+                      *ngIf="editingExercise != undefined; else name"
+                      (click)="$event.stopPropagation()">
+        <input matInput
+               placeholder="Name"
+               [(ngModel)]="editingExercise.name">
+      </mat-form-field>
+      <ng-template #name>
+        <span>
+          {{exercise.name}}
+        </span>
+      </ng-template>
+      <div>
+        <button mat-icon-button *ngIf="!editingExercise" (click)="startEditing(); $event.stopPropagation()">
+          <mat-icon>edit</mat-icon>
+        </button>
+        <button mat-icon-button *ngIf="editingExercise" (click)="stopEditing(true); $event.stopPropagation()">
+          <mat-icon>done</mat-icon>
+        </button>
+        <button mat-icon-button *ngIf="editingExercise" (click)="stopEditing(false); $event.stopPropagation()">
+          <mat-icon>clear</mat-icon>
+        </button>
+      </div>
+    </mat-panel-title>
+  </mat-expansion-panel-header>
+
+  <div fxLayout="column" fxLayoutAlign="start stretch">
+    <div fxLayoutAlign="space-between center">
+      <mat-form-field appearance="standard"
+                      *ngIf="editingExercise != undefined; else device"
+                      (click)="$event.stopPropagation()">
+        <mat-select placeholder="Device" [(ngModel)]="exercise.device" [compareWith]="database.compare">
+          <mat-option *ngFor="let device of database.devices" [value]="device">{{device.name}}</mat-option>
+        </mat-select>
+      </mat-form-field>
+      <ng-template #device>
+      <span>
+        {{exercise.device.name}}
+      </span>
+      </ng-template>
+      <button (click)="deleteExercise()" mat-icon-button>
+        <mat-icon>delete</mat-icon>
+      </button>
+    </div>
+    <mat-form-field appearance="standard"
+                    *ngIf="editingExercise != undefined; else description"
+                    (click)="$event.stopPropagation()">
+        <textarea matInput
+                  placeholder="Beschreibung"
+                  rows="1"
+                  [(ngModel)]="editingExercise.description"></textarea>
+    </mat-form-field>
+    <ng-template #description>
+      {{exercise.description}}
+    </ng-template>
+    <div fxLayout="column" fxLayoutAlign="start stretch">
+      <div *ngFor="let set of editingExercise == undefined ? exercise.sets : editingExercise.sets">
+        <mat-form-field appearance="standard"
+                        *ngIf="editingExercise != undefined; else workoutSet"
+                        (click)="$event.stopPropagation()">
+          <input matInput
+                 type="number"
+                 min="1"
+                 placeholder="Wiederholungen"
+                 [(ngModel)]="set.repetitions">
+        </mat-form-field>
+        <ng-template #workoutSet>
+          {{set.repetitions}}x {{set.description}}
+        </ng-template>
+      </div>
+    </div>
+  </div>
+</mat-expansion-panel>

@@ -1,7 +1,3 @@
-h1, h2, h3, h4 {
-  margin-bottom: 0;
-}
-
 app-searchable-list {
   resize: horizontal;
   width: 20vw;
@@ -12,25 +8,17 @@ mat-divider {
   background-color: rgba(0, 0, 0, 0.42);
 }
 
-.plan {
-  width: 300px;
-}
-
 .plans {
   overflow-x: auto;
+}
+
+.plan {
+  width: 400px;
 }
 
 .plan-title {
   padding: 20px;
   font-size: 32px;
   text-align: center;
-}
-
-.exercise {
-  margin: 5px 10px;
-  padding: 5px 10px;
-  border-radius: 5px;
-
-  color: white;
-  background-color: #5c8aff;
+  margin-bottom: 0;
 }

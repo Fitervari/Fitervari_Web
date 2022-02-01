@@ -1,0 +1,12 @@
+.mat-expansion-panel {
+  border-radius: 0 !important;
+  margin: 0;
+}
+
+.mat-expansion-panel-header-title, .mat-expansion-panel-header-description {
+  flex-basis: 0;
+}
+
+.mat-expansion-panel-header {
+  height: 48px;
+}
