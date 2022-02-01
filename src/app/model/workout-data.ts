@@ -2,9 +2,9 @@ import { WorkoutDataType } from "./workout-data-type";
 
 export class WorkoutData {
   constructor(
-    type: WorkoutDataType,
-    time: Date,
-    value: string,
-    id: number
+    public type: WorkoutDataType,
+    public time: Date,
+    public value: string,
+    public id: number
   ) {}
 }

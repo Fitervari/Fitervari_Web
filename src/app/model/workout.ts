@@ -1,6 +1,6 @@
 export class Workout {
   constructor(
-    date: Date,
-    id: number = 0,
+    public date: Date,
+    public id: number = 0,
   ) {}
 }
