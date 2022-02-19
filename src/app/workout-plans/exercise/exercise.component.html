@@ -32,7 +32,7 @@
       <mat-form-field appearance="standard"
                       *ngIf="editingExercise != undefined; else device"
                       (click)="$event.stopPropagation()">
-        <mat-select placeholder="Device" [(ngModel)]="exercise.deviceGroup" [compareWith]="database.compare">
+        <mat-select placeholder="Gerät" [(ngModel)]="editingExercise.deviceGroup" [compareWith]="database.compareId">
           <mat-option *ngFor="let device of database.devices" [value]="device">{{device.name}}</mat-option>
         </mat-select>
       </mat-form-field>
@@ -57,19 +57,32 @@
       {{exercise.description}}
     </ng-template>
     <div fxLayout="column" fxLayoutAlign="start stretch">
-      <div *ngFor="let set of editingExercise == undefined ? exercise.exerciseSets : editingExercise.exerciseSets">
-        <mat-form-field appearance="standard"
-                        *ngIf="editingExercise != undefined; else workoutSet"
-                        (click)="$event.stopPropagation()">
-          <input matInput
-                 type="number"
-                 min="1"
-                 placeholder="Wiederholungen"
-                 [(ngModel)]="set.repetitions">
-        </mat-form-field>
+      <div *ngFor="let set of editingExercise == undefined ? exercise.exerciseSets : editingExercise.exerciseSets; let i = index">
+        <div *ngIf="editingExercise != undefined; else workoutSet" fxLayoutAlign="start center">
+          <mat-form-field appearance="standard" class="edit-workoutset-repetitions">
+            <input matInput
+                   type="number"
+                   placeholder="#"
+                   [(ngModel)]="set.repetitions">
+            <span matSuffix>x</span>
+          </mat-form-field>
+          <mat-form-field appearance="standard" fxFlex>
+            <input matInput
+                   placeholder="Beschreibung"
+                   [(ngModel)]="set.description">
+          </mat-form-field>
+          <button mat-icon-button (click)="edit_deleteSet(i)">
+            <mat-icon>delete</mat-icon>
+          </button>
+        </div>
         <ng-template #workoutSet>
           {{set.repetitions}}x {{set.description}}
         </ng-template>
+      </div>
+      <div *ngIf="editingExercise != undefined" fxLayoutAlign="center center" (click)="edit_addSet()">
+        <button mat-icon-button>
+          <mat-icon>add</mat-icon>
+        </button>
       </div>
     </div>
   </div>

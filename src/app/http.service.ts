@@ -87,19 +87,16 @@ export class HttpService {
 
 
   getWorkoutPlans(user: User) {
-    console.log(this.getWorkoutPlanUrl(user));
     return this.http.get<WorkoutPlan[]>(this.getWorkoutPlanUrl(user));
   }
 
 
   getWorkouts(plan: WorkoutPlan) {
-    console.log(this.getWorkoutUrl(plan));
     return this.http.get<Workout[]>(this.getWorkoutUrl(plan));
   }
 
 
   getWorkoutData(args: Map<string, number>) {
-    console.log(this.getWorkoutDataUrl(args));
     return this.http.get<WorkoutData[]>(this.getWorkoutDataUrl(args));
   }
 }

@@ -81,7 +81,8 @@ export class DatabaseService {
               id: 1,
               deviceGroup: this.devices[4],
               name: "Beinpressen",
-            }]
+            }
+          ]
         )
       ]
     ]
@@ -91,7 +92,8 @@ export class DatabaseService {
 
   constructor(private http: HttpService) { }
 
-  compare(o1: any, o2: any) {
+  compareId(o1: any, o2: any) {
+    //console.log(`${typeof (o1)}(${o1.id}) == ${typeof (o2)}(${o2.id})`);
     if ('id' in o1 && 'id' in o2)
       return o1.id == o2.id;
     return o1 == o2;
