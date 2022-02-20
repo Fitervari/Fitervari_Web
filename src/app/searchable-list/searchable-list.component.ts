@@ -28,7 +28,6 @@ export class SearchableListComponent<T> implements OnInit {
   }
 
   filterAndSort() {
-    console.log("f&s" + this.data);
     this.shownData = (this.filterText === ""
         ? this.data.concat()
         : this.data.filter(d => this.shownProperty(d).toLowerCase().includes(this.filterText.toLowerCase()))

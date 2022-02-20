@@ -16,6 +16,15 @@ mat-divider {
   width: 400px;
 }
 
+.add-plan {
+  @extend .plan;
+  cursor: pointer;
+}
+
+.add-plan:hover {
+  background: rgba(0, 0, 0, 0.04);
+}
+
 .plan-title {
   padding: 20px;
   font-size: 32px;

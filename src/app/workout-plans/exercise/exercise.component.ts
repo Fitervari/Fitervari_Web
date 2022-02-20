@@ -10,6 +10,7 @@ import {
 import { WorkoutExercise } from "../../model/workoutExercise";
 import { MatExpansionPanel } from "@angular/material/expansion";
 import { DatabaseService } from "../../database.service";
+import { WorkoutSet } from "../../model/workoutSet";
 
 @Component({
   selector: 'app-exercise',
@@ -44,6 +45,7 @@ export class ExerciseComponent implements AfterViewInit {
   startEditing() {
     this.panel.open();
     this.editingExercise = Object.create(this.exercise);
+    this.editingExercise!.exerciseSets = this.editingExercise!.exerciseSets.concat();
   }
 
   stopEditing(saveChanges: boolean) {
@@ -64,5 +66,13 @@ export class ExerciseComponent implements AfterViewInit {
 
   deleteExercise() {
     this.delete.emit(this.exercise.id);
+  }
+
+  edit_deleteSet(index: number) {
+    this.editingExercise!.exerciseSets.splice(index, 1);
+  }
+
+  edit_addSet() {
+    this.editingExercise!.exerciseSets.push(new WorkoutSet(0, ""));
   }
 }

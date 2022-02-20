@@ -1,6 +1,5 @@
 .mat-expansion-panel {
   border-radius: 0 !important;
-  margin: 0;
 }
 
 .mat-expansion-panel-header-title, .mat-expansion-panel-header-description {
@@ -9,4 +8,13 @@
 
 .mat-expansion-panel-header {
   height: 48px;
+}
+
+.edit-workoutset-repetitions {
+  width: 50px;
+  padding-right: 10px;
+}
+
+.edit-workoutset-description {
+  width: 100px;
 }

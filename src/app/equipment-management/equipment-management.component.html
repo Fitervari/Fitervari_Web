@@ -11,7 +11,7 @@
         <mat-icon>add</mat-icon>
       </button>
     </mat-form-field>
-    <mat-accordion fxFlex>
+    <mat-accordion fxFlex displayMode="flat">
       <app-device *ngIf="newDevice != undefined"
                   [device]="newDevice"
                   [editOpen]="true"
