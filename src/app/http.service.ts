@@ -4,8 +4,6 @@ import { DeviceType } from "./model/deviceType";
 import { User } from "./model/user";
 import { WorkoutPlan } from "./model/workoutPlan";
 import { Workout } from "./model/workout";
-import { WorkoutExercise } from "./model/workoutExercise";
-import { WorkoutDataType } from "./model/workoutDataType";
 import { WorkoutData } from "./model/workoutData";
 
 @Injectable({

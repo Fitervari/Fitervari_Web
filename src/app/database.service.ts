@@ -149,7 +149,7 @@ export class DatabaseService {
     if (type != undefined)
       args.push(['type', type.id]);
     if (workout != undefined)
-      args.push(['workout', workout.id]);
+      args.push(['training', workout.id]);
     if (exercise != undefined)
       args.push(['exercise', exercise.id]);
 

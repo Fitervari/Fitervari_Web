@@ -1,10 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { User } from "../model/user";
 import { DatabaseService } from "../database.service";
 import { Workout } from "../model/workout";
 import { WorkoutExercise } from "../model/workoutExercise";
 import { WorkoutPlan } from "../model/workoutPlan";
 import { WorkoutDataType } from "../model/workoutDataType";
+import { SearchableListComponent } from "../searchable-list/searchable-list.component";
 
 @Component({
   selector: 'app-workout-data',
@@ -12,6 +13,9 @@ import { WorkoutDataType } from "../model/workoutDataType";
   styleUrls: ['./workout-data.component.scss']
 })
 export class WorkoutDataComponent implements OnInit {
+  @ViewChild(SearchableListComponent)
+  userList!: SearchableListComponent<User>;
+
   shownPlans: WorkoutPlan[] = [];
 
   nameProperty = (u: User) => `${u.firstName} ${u.lastName}`;
@@ -20,7 +24,11 @@ export class WorkoutDataComponent implements OnInit {
   constructor(public database: DatabaseService) { }
 
   ngOnInit(): void {
-    this.selectUser(this.database.users[0]);
+    this.database.getUsers(async () => {
+      this.selectUser(this.database.users[0]);
+      console.log("call f&s " + this.database.users)
+      this.userList.filterAndSort();
+    });
   }
 
   selectUser(user: User) {
@@ -37,10 +45,17 @@ export class WorkoutDataComponent implements OnInit {
   }
 
   showWorkoutDetail(workout: Workout, exercise?: WorkoutExercise) {
-    this.database.getWorkoutData(new WorkoutDataType("Puls", 1), workout, exercise, () => {
-      let message = 'Puls:\n';
-      for (let data of this.database.workoutData)
-        message += `${data.time}: ${data.value}\n`;
+    let type = new WorkoutDataType("Puls", 1);
+    this.database.getWorkoutData(type, workout, exercise, () => {
+      // DEMO: Show health data sample
+      let message = `Gesundheitsdaten für\ntypeId = ${type.id}\ntrainingId = ${workout.id}\nexerciseId = ${exercise?.id}\n`;
+
+      if (this.database.workoutData.length == 0)
+        message += "\nNo data found";
+      else
+        for (let data of this.database.workoutData)
+          message += `\n${data.time}: ${data.value}`;
+
       alert(message);
     });
   }
