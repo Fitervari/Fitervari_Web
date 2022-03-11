@@ -21,6 +21,8 @@ export class SearchableListComponent<T> implements OnInit {
   shownData: T[] = [];
   filterText = "";
 
+  selectedIndex = -1;
+
   constructor() { }
 
   ngOnInit(): void {
@@ -36,6 +38,7 @@ export class SearchableListComponent<T> implements OnInit {
 
   onItemOpen(item: T, index: number) {
     this.panels.get(index)!.close();
+    this.selectedIndex = index;
     this.itemClick.emit(item);
   }
 }

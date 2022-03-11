@@ -6,6 +6,10 @@ input {
   display: none;
 }
 
+.itemSelected {
+  background: rgba(0, 0, 0, 0.1) !important;
+}
+
 mat-accordion {
   overflow-y: auto;
 }
