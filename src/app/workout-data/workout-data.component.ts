@@ -24,10 +24,9 @@ export class WorkoutDataComponent implements OnInit {
   constructor(public database: DatabaseService) { }
 
   ngOnInit(): void {
-    this.database.getUsers(async () => {
+    this.database.getUsers(() => {
       this.selectUser(this.database.users[0]);
-      console.log("call f&s " + this.database.users)
-      this.userList.filterAndSort();
+      this.userList.updateShownData();
     });
   }
 
@@ -35,6 +34,12 @@ export class WorkoutDataComponent implements OnInit {
     this.selectedUser = user;
     this.database.getWorkoutPlans(this.selectedUser, () => {
       let plans = this.database.workoutPlans.get(this.selectedUser.id)!;
+
+      if (plans.length == 0) {
+        this.shownPlans = [];
+        return;
+      }
+
       for (let i = 0; i < plans.length; i++) {
         this.database.getWorkouts(plans[i], () => {
           if (i == plans.length - 1)

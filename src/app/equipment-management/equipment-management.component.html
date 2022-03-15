@@ -4,9 +4,10 @@
       <input matInput
              placeholder="Suche"
              [(ngModel)]="filterText"
-             (input)="filterAndSortDevices()">
+             (input)="updateShownDevices()">
       <button mat-icon-button
               matSuffix
+              matTooltip="Gerät hinzufügen"
               (click)="addNewDevice()">
         <mat-icon>add</mat-icon>
       </button>

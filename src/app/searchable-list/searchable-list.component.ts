@@ -1,5 +1,6 @@
 import { Component, EventEmitter, Input, OnInit, Output, QueryList, ViewChildren } from '@angular/core';
 import { MatExpansionPanel } from "@angular/material/expansion";
+import { Observable } from "rxjs";
 
 @Component({
   selector: 'app-searchable-list',
@@ -12,6 +13,7 @@ export class SearchableListComponent<T> implements OnInit {
 
   @Input()
   data!: T[];
+
   @Input()
   shownProperty!: (t: T) => any;
 
@@ -26,10 +28,11 @@ export class SearchableListComponent<T> implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
-    this.filterAndSort();
+    this.updateShownData();
   }
 
-  filterAndSort() {
+  updateShownData() {
+    console.log(this.data);
     this.shownData = (this.filterText === ""
         ? this.data.concat()
         : this.data.filter(d => this.shownProperty(d).toLowerCase().includes(this.filterText.toLowerCase()))

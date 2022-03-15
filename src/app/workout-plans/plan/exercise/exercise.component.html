@@ -6,6 +6,7 @@
                       (click)="$event.stopPropagation()">
         <input matInput
                placeholder="Name"
+               matTooltip="Name"
                [(ngModel)]="editingExercise.name">
       </mat-form-field>
       <ng-template #name>
@@ -14,13 +15,13 @@
         </span>
       </ng-template>
       <div>
-        <button mat-icon-button *ngIf="!editingExercise" (click)="startEditing(); $event.stopPropagation()">
+        <button mat-icon-button *ngIf="!editingExercise" (click)="startEditing(); $event.stopPropagation()" matTooltip="Bearbeiten">
           <mat-icon>edit</mat-icon>
         </button>
-        <button mat-icon-button *ngIf="editingExercise" (click)="stopEditing(true); $event.stopPropagation()">
+        <button mat-icon-button *ngIf="editingExercise" (click)="stopEditing(true); $event.stopPropagation()" matTooltip="Speichern">
           <mat-icon>done</mat-icon>
         </button>
-        <button mat-icon-button *ngIf="editingExercise" (click)="stopEditing(false); $event.stopPropagation()">
+        <button mat-icon-button *ngIf="editingExercise" (click)="stopEditing(false); $event.stopPropagation()" matTooltip="Abbrechen">
           <mat-icon>clear</mat-icon>
         </button>
       </div>
@@ -32,7 +33,10 @@
       <mat-form-field appearance="standard"
                       *ngIf="editingExercise != undefined; else device"
                       (click)="$event.stopPropagation()">
-        <mat-select placeholder="Gerät" [(ngModel)]="editingExercise.deviceGroup" [compareWith]="database.compareId">
+        <mat-select placeholder="Gerät"
+                    matTooltip="Gerät"
+                    [(ngModel)]="editingExercise.deviceGroup"
+                    [compareWith]="database.compareId">
           <mat-option *ngFor="let device of database.devices" [value]="device">{{device.name}}</mat-option>
         </mat-select>
       </mat-form-field>
@@ -41,7 +45,7 @@
         {{exercise.deviceGroup.name}}
       </span>
       </ng-template>
-      <button (click)="deleteExercise()" mat-icon-button>
+      <button (click)="deleteExercise()" mat-icon-button matTooltip="Übung löschen">
         <mat-icon>delete</mat-icon>
       </button>
     </div>
@@ -50,6 +54,7 @@
                     (click)="$event.stopPropagation()">
         <textarea matInput
                   placeholder="Beschreibung"
+                  matTooltip="Beschreibung"
                   rows="1"
                   [(ngModel)]="editingExercise.description"></textarea>
     </mat-form-field>
@@ -57,21 +62,24 @@
       {{exercise.description}}
     </ng-template>
     <div fxLayout="column" fxLayoutAlign="start stretch">
-      <div *ngFor="let set of editingExercise == undefined ? exercise.exerciseSets : editingExercise.exerciseSets; let i = index">
+      <div
+        *ngFor="let set of editingExercise == undefined ? exercise.exerciseSets : editingExercise.exerciseSets; let i = index">
         <div *ngIf="editingExercise != undefined; else workoutSet" fxLayoutAlign="start center">
           <mat-form-field appearance="standard" class="edit-workoutset-repetitions">
             <input matInput
                    type="number"
-                   placeholder="#"
+                   placeholder="12"
+                   matTooltip="Anzahl der Wiederholungen"
                    [(ngModel)]="set.repetitions">
             <span matSuffix>x</span>
           </mat-form-field>
           <mat-form-field appearance="standard" fxFlex>
             <input matInput
-                   placeholder="Beschreibung"
+                   placeholder="40 kg"
+                   matTooltip="Eine Wiederholung"
                    [(ngModel)]="set.description">
           </mat-form-field>
-          <button mat-icon-button (click)="edit_deleteSet(i)">
+          <button mat-icon-button (click)="edit_deleteSet(i)" matTooltip="Set löschen">
             <mat-icon>delete</mat-icon>
           </button>
         </div>
@@ -80,7 +88,7 @@
         </ng-template>
       </div>
       <div *ngIf="editingExercise != undefined" fxLayoutAlign="center center" (click)="edit_addSet()">
-        <button mat-icon-button>
+        <button mat-icon-button matTooltip="Set hinzufügen">
           <mat-icon>add</mat-icon>
         </button>
       </div>

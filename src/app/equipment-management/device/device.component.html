@@ -6,6 +6,7 @@
                       (click)="$event.stopPropagation()">
         <input matInput
                placeholder="Name"
+               matTooltip="Name"
                [(ngModel)]="editingDevice.name">
       </mat-form-field>
       <ng-template #name>
@@ -14,13 +15,13 @@
         </span>
       </ng-template>
       <div>
-        <button mat-icon-button *ngIf="!editingDevice" (click)="startEditing(); $event.stopPropagation()">
+        <button mat-icon-button *ngIf="!editingDevice" (click)="startEditing(); $event.stopPropagation()" matTooltip="Gerät bearbeiten">
           <mat-icon>edit</mat-icon>
         </button>
-        <button mat-icon-button *ngIf="editingDevice" (click)="stopEditing(true); $event.stopPropagation()">
+        <button mat-icon-button *ngIf="editingDevice" (click)="stopEditing(true); $event.stopPropagation()" matTooltip="Speichern">
           <mat-icon>done</mat-icon>
         </button>
-        <button mat-icon-button *ngIf="editingDevice" (click)="stopEditing(false); $event.stopPropagation()">
+        <button mat-icon-button *ngIf="editingDevice" (click)="stopEditing(false); $event.stopPropagation()" matTooltip="Abbrechen">
           <mat-icon>clear</mat-icon>
         </button>
       </div>
@@ -34,6 +35,7 @@
                     (click)="$event.stopPropagation()">
       <textarea matInput
                 placeholder="Beschreibung"
+                matTooltip="Beschreibung"
                 rows="1"
                 [(ngModel)]="editingDevice.description"></textarea>
     </mat-form-field>
@@ -42,7 +44,7 @@
         {{device.description}}
       </span>
     </ng-template>
-    <button (click)="deleteDevice()" mat-icon-button>
+    <button (click)="deleteDevice()" mat-icon-button matTooltip="Gerät löschen">
       <mat-icon>delete</mat-icon>
     </button>
   </div>

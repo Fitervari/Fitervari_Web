@@ -10,11 +10,12 @@ import { WorkoutData } from "./model/workoutData";
   providedIn: 'root'
 })
 export class HttpService {
+  //private baseurl = "https://localhost:8080/api";
   private baseurl = "https://student.cloud.htl-leonding.ac.at/m.rausch-schott/fitervari/api";
 
   constructor(private http: HttpClient) { }
 
-  private getDeviceUrl() {
+  private getDeviceUrl(by?: number) {
     return `${this.baseurl}/deviceGroups`;
   }
 
@@ -76,16 +77,28 @@ export class HttpService {
   }
 
   updateDevice(device: DeviceType) {
-    return this.http.put(this.getDeviceUrl(), device);
+    return this.http.put(this.getDeviceUrl(device.id), device);
   }
 
   deleteDevice(id: number) {
-    return this.http.delete(`${this.getDeviceUrl()}/${id}`);
+    return this.http.delete(this.getDeviceUrl(id));
   }
 
 
   getWorkoutPlans(user: User) {
     return this.http.get<WorkoutPlan[]>(this.getWorkoutPlanUrl(user));
+  }
+
+  createWorkoutPlan(plan: WorkoutPlan, user: User) {
+    return this.http.post<WorkoutPlan>(this.getWorkoutPlanUrl(user), plan);
+  }
+
+  updateWorkoutPlan(plan: WorkoutPlan) {
+    return this.http.put(this.getWorkoutPlanUrl(plan.id), plan);
+  }
+
+  deleteWorkoutPlan(id: number) {
+    return this.http.delete(this.getWorkoutPlanUrl(id));
   }
 
 

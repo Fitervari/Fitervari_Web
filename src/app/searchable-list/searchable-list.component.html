@@ -3,7 +3,7 @@
     <input matInput
            placeholder="Suche"
            [(ngModel)]="filterText"
-           (input)="filterAndSort()">
+           (input)="updateShownData()">
   </mat-form-field>
   <mat-accordion fxFlex>
     <mat-expansion-panel *ngFor="let d of shownData; let i = index"

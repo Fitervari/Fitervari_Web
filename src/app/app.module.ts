@@ -25,9 +25,12 @@ import { DeviceComponent } from './equipment-management/device/device.component'
 import { SearchableListComponent } from './searchable-list/searchable-list.component';
 import { MatDividerModule } from "@angular/material/divider";
 import { WorkoutDataComponent } from './workout-data/workout-data.component';
-import { ExerciseComponent } from './workout-plans/exercise/exercise.component';
+import { ExerciseComponent } from './workout-plans/plan/exercise/exercise.component';
 import { MatSelectModule } from "@angular/material/select";
 import { HttpService } from "./http.service";
+import { PlanComponent } from './workout-plans/plan/plan.component';
+import { MatTooltipModule } from "@angular/material/tooltip";
+import { HealthDataComponent } from './workout-data/health-data/health-data.component';
 
 @NgModule({
   declarations: [
@@ -39,7 +42,9 @@ import { HttpService } from "./http.service";
     DeviceComponent,
     SearchableListComponent,
     WorkoutDataComponent,
-    ExerciseComponent
+    ExerciseComponent,
+    PlanComponent,
+    HealthDataComponent
   ],
     imports: [
         BrowserModule,
@@ -59,7 +64,8 @@ import { HttpService } from "./http.service";
         OverlayModule,
         MatExpansionModule,
         MatDividerModule,
-        MatSelectModule
+        MatSelectModule,
+        MatTooltipModule
     ],
   providers: [],
   bootstrap: [AppComponent]

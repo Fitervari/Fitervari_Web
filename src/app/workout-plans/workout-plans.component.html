@@ -5,29 +5,14 @@
     (itemClick)="selectUser($event)"></app-searchable-list>
   <mat-divider vertical></mat-divider>
   <div class="plans" fxFlex fxLayoutAlign="start stretch">
-    <div *ngFor="let plan of database.workoutPlans.get(selectedUser.id); let i = index" class="plan" fxLayout="column"
-         fxLayoutAlign="start stretch">
-      <div fxLayoutAlign="center center">
-        <h1 class="plan-title">
-          {{plan.name}}
-        </h1>
-        <button mat-icon-button (click)="deletePlan(i)">
-          <mat-icon>delete</mat-icon>
-        </button>
-      </div>
-      <mat-accordion multi displayMode="flat">
-        <app-exercise *ngFor="let exercise of plan.exercises" [exercise]="exercise" (delete)="deleteExercise(plan, $event)"></app-exercise>
-        <mat-expansion-panel #addExercisePanel hideToggle (opened)="onAddExerciseClick(plan)">
-          <mat-expansion-panel-header>
-            <mat-panel-title fxLayoutAlign="center center">
-              <mat-icon>add</mat-icon>
-            </mat-panel-title>
-          </mat-expansion-panel-header>
-        </mat-expansion-panel>
-      </mat-accordion>
-    </div>
-    <mat-divider vertical></mat-divider>
-    <div class="add-plan" fxLayoutAlign="center center" (click)="addPlan()">
+    <app-plan *ngFor="let plan of database.workoutPlans.get(selectedUser.id)"
+              fxLayoutAlign="start stretch"
+              [plan]="plan"
+              (delete)="deletePlan($event)"
+              (editFinished)="editPlan($event)">
+    </app-plan>
+
+    <div class="add-plan" fxLayoutAlign="center center" (click)="addPlan()" matTooltip="Trainingsplan hinzufügen" matTooltipPosition="right">
       <mat-icon>add</mat-icon>
     </div>
     <mat-divider vertical></mat-divider>

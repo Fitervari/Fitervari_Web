@@ -2,7 +2,6 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { User } from "../model/user";
 import { DatabaseService } from "../database.service";
 import { SearchableListComponent } from "../searchable-list/searchable-list.component";
-import { MatExpansionPanel } from "@angular/material/expansion";
 import { WorkoutPlan } from "../model/workoutPlan";
 import { WorkoutExercise } from "../model/workoutExercise";
 
@@ -14,8 +13,7 @@ import { WorkoutExercise } from "../model/workoutExercise";
 export class WorkoutPlansComponent implements OnInit {
   @ViewChild(SearchableListComponent)
   userList!: SearchableListComponent<User>;
-  @ViewChild('addExercisePanel')
-  addExercisePanel!: MatExpansionPanel;
+
 
   nameProperty = (u: User) => `${u.firstName} ${u.lastName}`;
   selectedUser: User = new User("", "");
@@ -24,9 +22,9 @@ export class WorkoutPlansComponent implements OnInit {
 
   ngOnInit(): void {
     this.database.getDevices();
-    this.database.getUsers(async () => {
+    this.database.getUsers(() => {
       this.selectUser(this.database.users[0]);
-      this.userList.filterAndSort();
+      this.userList.updateShownData();
     });
   }
 
@@ -35,20 +33,19 @@ export class WorkoutPlansComponent implements OnInit {
     this.database.getWorkoutPlans(this.selectedUser);
   }
 
-  onAddExerciseClick(plan: WorkoutPlan) {
-    this.addExercisePanel.close();
-    plan.exercises.push(new WorkoutExercise("Neue Übung", this.database.devices[0]));
-  }
-
-  deleteExercise(plan: WorkoutPlan, exercise: number) {
-    plan.exercises.splice(plan.exercises.findIndex(e => this.database.compareId(e, exercise)));
-  }
-
   addPlan() {
-    this.database.workoutPlans.get(this.selectedUser.id)!.push(new WorkoutPlan("Neuer Trainingsplan"));
+    this.database.createWorkoutPlan(
+      new WorkoutPlan("Neuer Trainingsplan", Array<WorkoutExercise>(10).fill(new WorkoutExercise("Neue Übung", this.database.devices[0]))),
+      this.selectedUser);
   }
 
-  deletePlan(index: number) {
-    this.database.workoutPlans.get(this.selectedUser.id)!.splice(index, 1);
+  deletePlan(id: number) {
+    this.database.deleteWorkoutPlan(id, this.selectedUser);
+  }
+
+  editPlan(plan: WorkoutPlan) {
+    if (plan) {
+      this.database.updateWorkoutPlan(plan, this.selectedUser);
+    }
   }
 }

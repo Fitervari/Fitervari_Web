@@ -16,10 +16,10 @@ export class EquipmentManagementComponent implements OnInit {
   constructor(public database: DatabaseService) { }
 
   ngOnInit(): void {
-    this.database.getDevices(() => this.filterAndSortDevices());
+    this.database.getDevices(() => this.updateShownDevices());
   }
 
-  filterAndSortDevices() {
+  updateShownDevices() {
     this.shownDevices = (this.filterText === ""
         ? this.database.devices.concat()
         : this.database.devices.filter(d => d.name.toLowerCase().includes(this.filterText.toLowerCase()))
@@ -28,13 +28,13 @@ export class EquipmentManagementComponent implements OnInit {
 
   addNewDevice() {
     this.newDevice = new DeviceType("");
-    this.filterAndSortDevices();
+    this.updateShownDevices();
   }
 
   newDeviceFinished(device?: DeviceType) {
     if (device && (device.name !== "" || device.description !== "")) {
       this.database.createDevice(device);
-      this.filterAndSortDevices();
+      this.updateShownDevices();
     }
 
     this.newDevice = undefined;
@@ -43,7 +43,7 @@ export class EquipmentManagementComponent implements OnInit {
   editDevice(device: DeviceType) {
     if (device) {
       this.database.updateDevice(device);
-      this.filterAndSortDevices();
+      this.updateShownDevices();
     }
   }
 }

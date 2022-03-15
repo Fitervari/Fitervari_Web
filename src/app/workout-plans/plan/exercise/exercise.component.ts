@@ -1,16 +1,8 @@
-import {
-  AfterViewInit,
-  ChangeDetectorRef,
-  Component,
-  EventEmitter,
-  Input,
-  Output,
-  ViewChild
-} from '@angular/core';
-import { WorkoutExercise } from "../../model/workoutExercise";
+import { AfterViewInit, ChangeDetectorRef, Component, EventEmitter, Input, Output, ViewChild } from '@angular/core';
+import { WorkoutExercise } from "../../../model/workoutExercise";
 import { MatExpansionPanel } from "@angular/material/expansion";
-import { DatabaseService } from "../../database.service";
-import { WorkoutSet } from "../../model/workoutSet";
+import { DatabaseService } from "../../../database.service";
+import { WorkoutSet } from "../../../model/workoutSet";
 
 @Component({
   selector: 'app-exercise',

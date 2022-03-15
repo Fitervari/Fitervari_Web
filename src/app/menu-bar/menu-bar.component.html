@@ -1,14 +1,14 @@
 <mat-toolbar>
-  <a class="logo" routerLink="/">
+  <a class="logo">
     <img fxFlex alt="logo" src="favicon.ico">
   </a>
   <span class="navigation" fxLayoutAlign="space-around">
-    <span class="navigation-item" routerLink="workoutplans">Trainingspläne</span>
-    <span class="navigation-item" routerLink="equipment">Geräteverwaltung</span>
-    <span class="navigation-item" routerLink="workoutdata">Trainingsdaten</span>
+    <span class="navigation-item" routerLink="workoutplans" matTooltip="Erstellung & Verwaltung von Trainingsplänen">Trainingspläne</span>
+    <span class="navigation-item" routerLink="equipment" matTooltip="Erstellung & Verwaltung von Gerättypen">Geräteverwaltung</span>
+    <span class="navigation-item" routerLink="workoutdata" matTooltip="Daten über absolvierte Trainingspläne">Trainingsdaten</span>
   </span>
   <span fxFlex></span>
-  <button mat-icon-button routerLink="login">
+  <button mat-icon-button routerLink="login" matTooltip="Ausloggen">
     <mat-icon>logout</mat-icon>
   </button>
 </mat-toolbar>
