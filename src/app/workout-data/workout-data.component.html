@@ -1,11 +1,11 @@
 <div style="resize: both" fxFill fxLayoutAlign="start">
   <app-searchable-list
     [data]="database.users"
-    [shownProperty]="nameProperty"
+    [shownProperty]="fullName"
     (itemClick)="selectUser($event)"></app-searchable-list>
   <mat-divider vertical></mat-divider>
-  <div class="plans" fxFlex fxLayoutAlign="start stretch">
-    <div fxFlex *ngFor="let plan of shownPlans" fxLayoutAlign="start stretch">
+  <div fxFlex class="plans" fxLayoutAlign="start stretch">
+    <div *ngFor="let plan of shownPlans">
       <div *ngFor="let workout of database.workouts.get(plan.id)">
         <div fxFlex class="workout" fxLayout="column" fxLayoutAlign="start stretch">
           <h1 class="workout-title">
@@ -21,13 +21,20 @@
                  (click)="showWorkoutDetail(workout, exercise)"
                  fxLayout="column"
                  fxLayoutAlign="start">
-              <div class="exercise-title" fxLayoutAlign="space-between">
-                <h2>
-                  {{exercise.deviceGroup.name}}
-                </h2>
-                <h3>
-                  {{workout.startTime }} - {{workout.endTime}}
-                </h3>
+              <div class="exercise-title" fxLayout="column" fxLayoutAlign="start stretch">
+                <div fxLayoutAlign="space-between">
+                  <h2>
+                    {{exercise.name}}
+                  </h2>
+                  <h3>
+                    {{workout.startTime }} - {{workout.endTime}}
+                  </h3>
+                </div>
+                <div>
+                  <h3>
+                    {{exercise.deviceGroup.name}}
+                  </h3>
+                </div>
               </div>
               <div class="set" *ngFor="let set of exercise.exerciseSets">
                 <span class="repetitions">{{set.repetitions}}x</span>{{set.description}}

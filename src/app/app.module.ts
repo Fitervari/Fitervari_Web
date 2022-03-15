@@ -27,10 +27,10 @@ import { MatDividerModule } from "@angular/material/divider";
 import { WorkoutDataComponent } from './workout-data/workout-data.component';
 import { ExerciseComponent } from './workout-plans/plan/exercise/exercise.component';
 import { MatSelectModule } from "@angular/material/select";
-import { HttpService } from "./http.service";
 import { PlanComponent } from './workout-plans/plan/plan.component';
 import { MatTooltipModule } from "@angular/material/tooltip";
 import { HealthDataComponent } from './workout-data/health-data/health-data.component';
+import { MatDialogModule } from "@angular/material/dialog";
 
 @NgModule({
   declarations: [
@@ -46,27 +46,28 @@ import { HealthDataComponent } from './workout-data/health-data/health-data.comp
     PlanComponent,
     HealthDataComponent
   ],
-    imports: [
-        BrowserModule,
-        HttpClientModule,
-        AppRoutingModule,
-        FlexModule,
-        BrowserAnimationsModule,
-        MatToolbarModule,
-        MatButtonModule,
-        MatIconModule,
-        MatCardModule,
-        MatTableModule,
-        MatFormFieldModule,
-        MatInputModule,
-        FormsModule,
-        MatRippleModule,
-        OverlayModule,
-        MatExpansionModule,
-        MatDividerModule,
-        MatSelectModule,
-        MatTooltipModule
-    ],
+  imports: [
+    BrowserModule,
+    HttpClientModule,
+    AppRoutingModule,
+    FlexModule,
+    BrowserAnimationsModule,
+    MatToolbarModule,
+    MatButtonModule,
+    MatIconModule,
+    MatCardModule,
+    MatTableModule,
+    MatFormFieldModule,
+    MatInputModule,
+    FormsModule,
+    MatRippleModule,
+    OverlayModule,
+    MatExpansionModule,
+    MatDividerModule,
+    MatSelectModule,
+    MatTooltipModule,
+    MatDialogModule
+  ],
   providers: [],
   bootstrap: [AppComponent]
 })

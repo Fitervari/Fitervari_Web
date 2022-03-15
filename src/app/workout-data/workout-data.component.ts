@@ -6,6 +6,9 @@ import { WorkoutExercise } from "../model/workoutExercise";
 import { WorkoutPlan } from "../model/workoutPlan";
 import { WorkoutDataType } from "../model/workoutDataType";
 import { SearchableListComponent } from "../searchable-list/searchable-list.component";
+import { MatDialog } from "@angular/material/dialog";
+import { HealthDataComponent } from "./health-data/health-data.component";
+import { HealthDataBlock } from "../model/healthDataBlock";
 
 @Component({
   selector: 'app-workout-data',
@@ -18,10 +21,10 @@ export class WorkoutDataComponent implements OnInit {
 
   shownPlans: WorkoutPlan[] = [];
 
-  nameProperty = (u: User) => `${u.firstName} ${u.lastName}`;
+  fullName = (u: User) => `${u.firstName} ${u.lastName}`;
   selectedUser: User = new User("", "");
 
-  constructor(public database: DatabaseService) { }
+  constructor(public database: DatabaseService, public dialog: MatDialog) { }
 
   ngOnInit(): void {
     this.database.getUsers(() => {
@@ -49,19 +52,15 @@ export class WorkoutDataComponent implements OnInit {
     });
   }
 
-  showWorkoutDetail(workout: Workout, exercise?: WorkoutExercise) {
+  showWorkoutDetail(workout: Workout, exercise: WorkoutExercise) {
     let type = new WorkoutDataType("Puls", 1);
     this.database.getWorkoutData(type, workout, exercise, () => {
-      // DEMO: Show health data sample
-      let message = `Gesundheitsdaten für\ntypeId = ${type.id}\ntrainingId = ${workout.id}\nexerciseId = ${exercise?.id}\n`;
-
-      if (this.database.workoutData.length == 0)
-        message += "\nNo data found";
-      else
-        for (let data of this.database.workoutData)
-          message += `\n${data.time}: ${data.value}`;
-
-      alert(message);
+      this.dialog.open(HealthDataComponent, {
+        data: new HealthDataBlock(
+          `Gesundheitsdaten von ${this.fullName(this.selectedUser)} während der Übung "${exercise.name}" am Gerät ${exercise.deviceGroup.name}`,
+          workout,
+          this.database.workoutData)
+      });
     });
   }
 }
