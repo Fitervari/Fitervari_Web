@@ -9,6 +9,7 @@ import { SearchableListComponent } from "../searchable-list/searchable-list.comp
 import { MatDialog } from "@angular/material/dialog";
 import { HealthDataComponent } from "./health-data/health-data.component";
 import { HealthDataBlock } from "../model/healthDataBlock";
+import { formatDate } from "@angular/common";
 
 @Component({
   selector: 'app-workout-data',
@@ -62,5 +63,9 @@ export class WorkoutDataComponent implements OnInit {
           this.database.workoutData)
       });
     });
+  }
+
+  formatWorkoutPlanDate(date: Date) {
+    return formatDate(date, "dd.MM.yyyy", "en");
   }
 }

@@ -31,6 +31,7 @@ import { PlanComponent } from './workout-plans/plan/plan.component';
 import { MatTooltipModule } from "@angular/material/tooltip";
 import { HealthDataComponent } from './workout-data/health-data/health-data.component';
 import { MatDialogModule } from "@angular/material/dialog";
+import { NgApexchartsModule } from "ng-apexcharts";
 
 @NgModule({
   declarations: [
@@ -66,7 +67,8 @@ import { MatDialogModule } from "@angular/material/dialog";
     MatDividerModule,
     MatSelectModule,
     MatTooltipModule,
-    MatDialogModule
+    MatDialogModule,
+    NgApexchartsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

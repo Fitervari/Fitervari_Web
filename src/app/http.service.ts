@@ -108,6 +108,7 @@ export class HttpService {
 
 
   getWorkoutData(args: Map<string, number>) {
+    console.log(this.getWorkoutDataUrl(args));
     return this.http.get<WorkoutData[]>(this.getWorkoutDataUrl(args));
   }
 }

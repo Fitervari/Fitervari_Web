@@ -5,14 +5,14 @@
     (itemClick)="selectUser($event)"></app-searchable-list>
   <mat-divider vertical></mat-divider>
   <div fxFlex class="plans" fxLayoutAlign="start stretch">
-    <div *ngFor="let plan of shownPlans">
+    <div *ngFor="let plan of shownPlans" fxLayoutAlign="start stretch">
       <div *ngFor="let workout of database.workouts.get(plan.id)">
         <div fxFlex class="workout" fxLayout="column" fxLayoutAlign="start stretch">
           <h1 class="workout-title">
             {{plan.name}}
           </h1>
           <h2 class="workout-date">
-            {{workout.date}}
+            {{formatWorkoutPlanDate(workout.date)}}
           </h2>
           <div fxFlex fxLayout="column" fxLayoutAlign="start stretch">
             <div mat-ripple

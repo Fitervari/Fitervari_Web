@@ -1,15 +1,19 @@
 <div matDialogTitle fxLayoutAlign="space-between">
   <h1>{{healthData.title}}</h1>
-  <h1 class="date">{{healthData.workout.date}}</h1>
+  <h1 class="date">{{formatWorkoutPlanDate(healthData.workout.date)}}</h1>
 </div>
 <div matDialogContent class="content">
-  <div #diagram class="diagram" fxFlex fxLayoutAlign="start end">
-    <div class="bar"
-         *ngFor="let workoutData of healthData.data"
-         [style.height]="diagram.offsetHeight * workoutData.value / maxValue + 'px'"
-         [style.width]="diagram.offsetWidth / healthData.data.length - 1 + 'px'">
-    </div>
-  </div>
+  <apx-chart
+    [series]="chartOptions.series!"
+    [chart]="chartOptions.chart!"
+    [xaxis]="chartOptions.xaxis!"
+    [yaxis]="chartOptions.yaxis!"
+    [dataLabels]="chartOptions.dataLabels!"
+    [grid]="chartOptions.grid!"
+    [stroke]="chartOptions.stroke!"
+    [title]="chartOptions.title!"
+    [fill]="chartOptions.fill!"
+  ></apx-chart>
 </div>
 <div matDialogActions fxLayoutAlign="end center">
   <button mat-button matDialogClose>Zurück</button>
