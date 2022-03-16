@@ -8,7 +8,9 @@ import { HealthDataBlock } from "../../model/healthDataBlock";
   styleUrls: ['./health-data.component.scss']
 })
 export class HealthDataComponent {
-  constructor(@Inject(MAT_DIALOG_DATA) public healthData: HealthDataBlock) {
+  maxValue: number = 0;
 
+  constructor(@Inject(MAT_DIALOG_DATA) public healthData: HealthDataBlock) {
+    this.maxValue = healthData.data.sort((d1, d2) => d2.value - d1.value)[0].value;
   }
 }

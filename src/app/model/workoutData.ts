@@ -4,7 +4,7 @@ export class WorkoutData {
   constructor(
     public type: WorkoutDataType,
     public time: Date,
-    public value: string,
+    public value: number,
     public id: number
   ) {}
 }
