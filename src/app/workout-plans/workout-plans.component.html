@@ -12,8 +12,10 @@
               (editFinished)="editPlan($event)">
     </app-plan>
 
-    <div class="add-plan" fxLayoutAlign="center center" (click)="addPlan()" matTooltip="Trainingsplan hinzufügen" matTooltipPosition="right">
-      <mat-icon>add</mat-icon>
+    <div (click)="addPlan()" matTooltip="Trainingsplan hinzufügen" matTooltipPosition="right">
+      <div fxFlex class="add-plan" fxLayoutAlign="center center">
+        <mat-icon>add</mat-icon>
+      </div>
     </div>
     <mat-divider vertical></mat-divider>
   </div>

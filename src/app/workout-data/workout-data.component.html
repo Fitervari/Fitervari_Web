@@ -12,7 +12,7 @@
             {{plan.name}}
           </h1>
           <h2 class="workout-date">
-            {{formatWorkoutPlanDate(workout.date)}}
+            {{formatWorkoutPlanDate(workout.date)}} {{workout.startTime}} - {{workout.endTime}}
           </h2>
           <div fxFlex fxLayout="column" fxLayoutAlign="start stretch">
             <div mat-ripple
@@ -22,14 +22,9 @@
                  fxLayout="column"
                  fxLayoutAlign="start">
               <div class="exercise-title" fxLayout="column" fxLayoutAlign="start stretch">
-                <div fxLayoutAlign="space-between">
-                  <h2>
-                    {{exercise.name}}
-                  </h2>
-                  <h3>
-                    {{workout.startTime }} - {{workout.endTime}}
-                  </h3>
-                </div>
+                <h2>
+                  {{exercise.name}}
+                </h2>
                 <div>
                   <h3>
                     {{exercise.deviceGroup.name}}

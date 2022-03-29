@@ -57,9 +57,9 @@
   <mat-accordion multi displayMode="flat">
     <app-exercise *ngFor="let exercise of plan.exercises"
                   [exercise]="exercise"
-                  (delete)="deleteExercise(plan, $event)"
+                  (delete)="deleteExercise($event)"
                   (editFinished)="editExercise($event)"></app-exercise>
-    <mat-expansion-panel #addExercisePanel hideToggle (opened)="addExercise(plan)" matTooltip="Übung hinzufügen">
+    <mat-expansion-panel #addExercisePanel hideToggle (opened)="addExercise()" matTooltip="Übung hinzufügen">
       <mat-expansion-panel-header>
         <mat-panel-title fxLayoutAlign="center center">
           <mat-icon>add</mat-icon>

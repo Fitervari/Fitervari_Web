@@ -3,6 +3,7 @@ import { MatExpansionPanel } from "@angular/material/expansion";
 import { WorkoutPlan } from "../../model/workoutPlan";
 import { WorkoutExercise } from "../../model/workoutExercise";
 import { DatabaseService } from "../../database.service";
+import { User } from "../../model/user";
 
 @Component({
   selector: 'app-plan',
@@ -38,7 +39,7 @@ export class PlanComponent implements AfterViewInit {
 
   startEditing() {
     this.panel.open();
-    this.editingPlan = Object.create(this.plan);
+    this.editingPlan = { ...this.plan };
   }
 
   stopEditing(saveChanges: boolean) {
@@ -46,8 +47,8 @@ export class PlanComponent implements AfterViewInit {
       return;
 
     if (saveChanges) {
-      this.editFinished.emit(this.editingPlan);
       this.plan = this.editingPlan;
+      this.editFinished.emit(this.editingPlan);
     }
     else {
       this.editFinished.emit(undefined);
@@ -57,13 +58,15 @@ export class PlanComponent implements AfterViewInit {
     this.panel.close();
   }
 
-  addExercise(plan: WorkoutPlan) {
+  addExercise() {
     this.addExercisePanel.close();
-    plan.exercises.push(new WorkoutExercise("Neue Übung", this.database.devices[0])); //TODO: DB
+    this.plan.exercises.push(new WorkoutExercise("Neue Übung", this.database.devices[0]));
+    this.editFinished.emit(this.plan);
   }
 
-  deleteExercise(plan: WorkoutPlan, id: number) {
-    plan.exercises.splice(plan.exercises.findIndex(e => this.database.compareId(e, id)));  //TODO: DB
+  deleteExercise(id: number) {
+    this.plan.exercises.splice(this.plan.exercises.findIndex(e => this.database.compareId(e, id)));
+    this.editFinished.emit(this.plan);
   }
 
   deletePlan() {
@@ -71,8 +74,6 @@ export class PlanComponent implements AfterViewInit {
   }
 
   editExercise(exercise: WorkoutExercise) {
-    if (exercise) {
-      //this.database.updateExercise(exercise);
-    }
+    this.editFinished.emit(this.plan);
   }
 }

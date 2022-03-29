@@ -59,7 +59,7 @@ export class DatabaseService {
 
 
   getWorkoutPlans(user: User, callback: (() => void) = this.defaultCallback) {
-    console.log("get plans")
+    console.log("get plans");
     this.http.getWorkoutPlans(user).subscribe(data => {
       this.workoutPlans.set(user.id, data);
       callback();
@@ -67,17 +67,18 @@ export class DatabaseService {
   }
 
   createWorkoutPlan(plan: WorkoutPlan, user: User, callback: (() => void) = this.defaultCallback) {
-    console.log("create plan")
+    console.log("create plan");
     this.http.createWorkoutPlan(plan, user).subscribe(_ => this.getWorkoutPlans(user, callback));
   }
 
-  updateWorkoutPlan(WorkoutPlan: WorkoutPlan, user: User, callback: (() => void) = this.defaultCallback) {
-    console.log("update plan")
-    this.http.updateWorkoutPlan(WorkoutPlan).subscribe(_ => this.getWorkoutPlans(user, callback));
+  updateWorkoutPlan(plan: WorkoutPlan, user: User, callback: (() => void) = this.defaultCallback) {
+    console.log("update plan");
+    console.log(plan); //TODO
+    this.http.updateWorkoutPlan(plan).subscribe(_ => this.getWorkoutPlans(user, callback));
   }
 
   deleteWorkoutPlan(id: number, user: User, callback: (() => void) = this.defaultCallback) {
-    console.log("delete plan")
+    console.log("delete plan");
     this.http.deleteWorkoutPlan(id).subscribe(_ => this.getWorkoutPlans(user, callback));
   }
 

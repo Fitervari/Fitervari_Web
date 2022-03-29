@@ -32,7 +32,6 @@ export class SearchableListComponent<T> implements OnInit {
   }
 
   updateShownData() {
-    console.log(this.data);
     this.shownData = (this.filterText === ""
         ? this.data.concat()
         : this.data.filter(d => this.shownProperty(d).toLowerCase().includes(this.filterText.toLowerCase()))

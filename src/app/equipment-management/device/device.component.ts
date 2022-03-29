@@ -1,11 +1,4 @@
-import {
-  AfterViewInit, ChangeDetectorRef,
-  Component,
-  EventEmitter,
-  Input,
-  Output,
-  ViewChild
-} from '@angular/core';
+import { AfterViewInit, ChangeDetectorRef, Component, EventEmitter, Input, Output, ViewChild } from '@angular/core';
 import { DeviceType } from "../../model/deviceType";
 import { MatExpansionPanel } from "@angular/material/expansion";
 
@@ -41,7 +34,7 @@ export class DeviceComponent implements AfterViewInit {
 
   startEditing() {
     this.panel.open();
-    this.editingDevice = Object.create(this.device);
+    this.editingDevice = { ...this.device }; //clone
   }
 
   stopEditing(saveChanges: boolean) {
@@ -49,8 +42,8 @@ export class DeviceComponent implements AfterViewInit {
       return;
 
     if (saveChanges) {
-      this.editFinished.emit(this.editingDevice);
       this.device = this.editingDevice;
+      this.editFinished.emit(this.editingDevice);
     }
     else {
       this.editFinished.emit(undefined);

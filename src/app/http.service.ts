@@ -16,7 +16,9 @@ export class HttpService {
   constructor(private http: HttpClient) { }
 
   private getDeviceUrl(by?: number) {
-    return `${this.baseurl}/deviceGroups`;
+    const url = `${this.baseurl}/deviceGroups`;
+
+    return by != undefined ? `${url}/${by}` : url;
   }
 
   private getUserUrl(by?: number) {
@@ -73,11 +75,11 @@ export class HttpService {
   }
 
   createDevice(device: DeviceType) {
-    return this.http.post(this.getDeviceUrl(), device);
+    return this.http.post<DeviceType>(this.getDeviceUrl(), device);
   }
 
   updateDevice(device: DeviceType) {
-    return this.http.put(this.getDeviceUrl(device.id), device);
+    return this.http.put<DeviceType>(this.getDeviceUrl(device.id), device);
   }
 
   deleteDevice(id: number) {
@@ -94,7 +96,7 @@ export class HttpService {
   }
 
   updateWorkoutPlan(plan: WorkoutPlan) {
-    return this.http.put(this.getWorkoutPlanUrl(plan.id), plan);
+    return this.http.put<WorkoutPlan>(this.getWorkoutPlanUrl(plan.id), plan);
   }
 
   deleteWorkoutPlan(id: number) {
@@ -108,7 +110,6 @@ export class HttpService {
 
 
   getWorkoutData(args: Map<string, number>) {
-    console.log(this.getWorkoutDataUrl(args));
     return this.http.get<WorkoutData[]>(this.getWorkoutDataUrl(args));
   }
 }

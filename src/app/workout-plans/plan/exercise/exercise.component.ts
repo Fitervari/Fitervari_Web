@@ -36,7 +36,7 @@ export class ExerciseComponent implements AfterViewInit {
 
   startEditing() {
     this.panel.open();
-    this.editingExercise = Object.create(this.exercise);
+    this.editingExercise = { ...this.exercise };
     this.editingExercise!.exerciseSets = this.editingExercise!.exerciseSets.concat();
   }
 
@@ -45,8 +45,8 @@ export class ExerciseComponent implements AfterViewInit {
       return;
 
     if (saveChanges) {
-      this.editFinished.emit(this.editingExercise);
       this.exercise = this.editingExercise;
+      this.editFinished.emit(this.editingExercise);
     }
     else {
       this.editFinished.emit(undefined);
@@ -62,9 +62,13 @@ export class ExerciseComponent implements AfterViewInit {
 
   edit_deleteSet(index: number) {
     this.editingExercise!.exerciseSets.splice(index, 1);
+    this.exercise = this.editingExercise!;
+    this.editFinished.emit(this.editingExercise);
   }
 
   edit_addSet() {
     this.editingExercise!.exerciseSets.push(new WorkoutSet(0, ""));
+    this.exercise = this.editingExercise!;
+    this.editFinished.emit(this.editingExercise);
   }
 }
