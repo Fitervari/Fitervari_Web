@@ -5,111 +5,59 @@ import { User } from "./model/user";
 import { WorkoutPlan } from "./model/workoutPlan";
 import { Workout } from "./model/workout";
 import { WorkoutData } from "./model/workoutData";
+import { UrlBuilderService } from "./url-builder.service";
 
 @Injectable({
   providedIn: 'root'
 })
 export class HttpService {
-  //private baseurl = "https://localhost:8080/api";
-  private baseurl = "https://student.cloud.htl-leonding.ac.at/m.rausch-schott/fitervari/api";
-
-  constructor(private http: HttpClient) { }
-
-  private getDeviceUrl(by?: number) {
-    const url = `${this.baseurl}/deviceGroups`;
-
-    return by != undefined ? `${url}/${by}` : url;
-  }
-
-  private getUserUrl(by?: number) {
-    const url = `${this.baseurl}/users`;
-
-    return by != undefined ? `${url}/${by}` : url;
-  }
-
-  private getWorkoutPlanUrl(by?: number | User) {
-    const url = `${this.baseurl}/workoutPlans`;
-
-    if (by != undefined) {
-      if (typeof(by) == "number")
-        return `${url}/${by}`;
-      return `${this.getUserUrl(by.id)}/workoutPlans`;
-    }
-    return url;
-  }
-
-  private getWorkoutUrl(by?: number | WorkoutPlan) {
-    const url = `${this.baseurl}/workoutSessions`;
-
-    if (by != undefined) {
-      if (typeof(by) == "number")
-        return `${url}/${by}`;
-      return `${this.getWorkoutPlanUrl(by.id)}/workoutSessions`;
-    }
-    return url;
-  }
-
-  getWorkoutDataUrl(args: Map<string, number>) {
-    let url = `${this.baseurl}/healthdata`;
-
-    if (args.size > 0) {
-      let argsString = "";
-
-      for (let [key, value] of args)
-        argsString += `&${key}=${value}`;
-
-      url += argsString.replace('&', '?');
-    }
-
-    return url;
-  }
-
+  constructor(private http: HttpClient, private urlBuilder: UrlBuilderService) { }
 
   getUsers() {
-    return this.http.get<User[]>(this.getUserUrl());
+    return this.http.get<User[]>(this.urlBuilder.getUserUrl());
   }
 
 
   getDevices() {
-    return this.http.get<DeviceType[]>(this.getDeviceUrl());
+    return this.http.get<DeviceType[]>(this.urlBuilder.getDeviceUrl());
   }
 
   createDevice(device: DeviceType) {
-    return this.http.post<DeviceType>(this.getDeviceUrl(), device);
+    return this.http.post<DeviceType>(this.urlBuilder.getDeviceUrl(), device);
   }
 
   updateDevice(device: DeviceType) {
-    return this.http.put<DeviceType>(this.getDeviceUrl(device.id), device);
+    return this.http.put<DeviceType>(this.urlBuilder.getDeviceUrl(device.id), device);
   }
 
   deleteDevice(id: number) {
-    return this.http.delete(this.getDeviceUrl(id));
+    return this.http.delete(this.urlBuilder.getDeviceUrl(id));
   }
 
 
   getWorkoutPlans(user: User) {
-    return this.http.get<WorkoutPlan[]>(this.getWorkoutPlanUrl(user));
+    return this.http.get<WorkoutPlan[]>(this.urlBuilder.getWorkoutPlanUrl(user));
   }
 
   createWorkoutPlan(plan: WorkoutPlan, user: User) {
-    return this.http.post<WorkoutPlan>(this.getWorkoutPlanUrl(user), plan);
+    return this.http.post<WorkoutPlan>(this.urlBuilder.getWorkoutPlanUrl(user), plan);
   }
 
   updateWorkoutPlan(plan: WorkoutPlan) {
-    return this.http.put<WorkoutPlan>(this.getWorkoutPlanUrl(plan.id), plan);
+    return this.http.put<WorkoutPlan>(this.urlBuilder.getWorkoutPlanUrl(plan.id), plan);
   }
 
   deleteWorkoutPlan(id: number) {
-    return this.http.delete(this.getWorkoutPlanUrl(id));
+    return this.http.delete(this.urlBuilder.getWorkoutPlanUrl(id));
   }
 
 
   getWorkouts(plan: WorkoutPlan) {
-    return this.http.get<Workout[]>(this.getWorkoutUrl(plan));
+    return this.http.get<Workout[]>(this.urlBuilder.getWorkoutUrl(plan));
   }
 
 
   getWorkoutData(args: Map<string, number>) {
-    return this.http.get<WorkoutData[]>(this.getWorkoutDataUrl(args));
+    return this.http.get<WorkoutData[]>(this.urlBuilder.getWorkoutDataUrl(args));
   }
 }
